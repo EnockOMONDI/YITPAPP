@@ -10,7 +10,7 @@ from django.http import HttpResponseNotFound, Http404
 # Create your views here.
 class blog(ListView):
    model = Post
-   template_name = 'blog_list.html'
+   template_name = 'blog/blog_list.html'
    context_object_name = 'posts'
    cats = Categories.objects.all()
    ordering = ['-post_date']  

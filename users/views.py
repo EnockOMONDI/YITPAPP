@@ -72,9 +72,6 @@ def registration2(request):
     
     return render(request, 'users/registration2.html')
 
-def blog(request):
-    
-    return render(request, 'users/blog.html')
 
 def events(request):
     
