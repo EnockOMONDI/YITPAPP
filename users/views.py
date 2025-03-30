@@ -80,9 +80,39 @@ def faqs(request):
     
     return render(request, 'users/faqs.html')
 
-def contactus(request):
+def contact(request):
     
-    return render(request, 'users/contactus.html')  
+    return render(request, 'users/contact.html') 
+    
+
+def coursedetail1(request):
+    
+    return render(request, 'users/coursedetail1.html')   
+
+def coursedetail2(request):
+    
+    return render(request, 'users/coursedetail2.html')
+
+def coursedetail3(request):
+    
+    return render(request, 'users/coursedetail3.html')  
+
+def coursedetail4(request):
+    
+    return render(request, 'users/coursedetail4.html')      
+
+def coursedetail5(request):
+    
+    return render(request, 'users/coursedetail5.html')
+
+def coursedetail6(request):
+    
+    return render(request, 'users/coursedetail6.html')
+
+
+
+
+
 
 
 
