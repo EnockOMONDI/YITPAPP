@@ -1,0 +1,85 @@
+{% load static %}
+<header>
+    <div id="header-sticky" class="header__area header__transparent header__padding">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
+                    <div class="header__left d-flex">
+                        <div class="logo">
+                            <a href="{% url 'users:home' %}">
+                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 140%;" alt="logo">
+                            </a>
+                        </div>
+                        <div class="header__category d-none d-lg-block">
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <a href="" class="cat-menu d-flex align-items-center">
+                                            <div class="cat-dot-icon d-inline-block">
+                                                <!-- SVG content -->
+                                            </div>
+                                            <span>View Course</span>
+                                        </a>
+                                        <ul class="cat-submenu">
+                                            <li style="padding-left: 20px; color: #1a2e53;">
+                                                <a href="{% url 'users:courses' %}">YITP Course & Units</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
+                    <div class="header__right d-flex justify-content-end align-items-center">
+                        <div class="main-menu">
+                            <nav id="mobile-menu">
+                                <ul>
+                                    <li><a href="{% url 'users:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
+                                    <li><a href="{% url 'users:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">Our Story</a></li>
+                                    <li><a href="{% url 'users:team' %}" class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">The Team</a></li>
+                                    <li><a href="{% url 'users:registration' %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}">How To Get Started?</a></li>
+                                    <li><a href="{% url 'blog:blog' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">Blogs & News</a></li>
+                                    <li><a href="{% url 'users:events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>
+                                    <li><a href="{% url 'users:faqs' %}" class="{% if request.resolver_match.url_name == 'faqs' %}active{% endif %}">FAQS</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="header__btn ml-20 d-none d-sm-block">
+                            <a href="{% url 'users:contact' %}" class="e-btn">Contact Us</a>
+                        </div>
+                        <div class="sidebar__menu d-xl-none">
+                            <div class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
+                                <span class="line"></span>
+                                <span class="line"></span>
+                                <span class="line"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile sidebar -->
+<div class="sidebar__area">
+    <div class="sidebar__wrapper">
+        <div class="sidebar__close">
+            <button class="sidebar__close-btn" id="sidebar__close-btn">
+                <span><i class="fal fa-times"></i></span>
+                <span>close</span>
+            </button>
+        </div>
+        <div class="sidebar__content">
+            <div class="logo mb-40">
+                <a href="{% url 'users:home' %}">
+                    <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 75%;" alt="logo">
+                </a>
+            </div>
+            <div class="mobile-menu fix"></div>
+        </div>
+    </div>
+</div>
+<div class="body-overlay"></div>

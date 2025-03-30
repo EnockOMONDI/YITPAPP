@@ -47,3 +47,42 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'logout.html')
+
+def home(request):
+    
+    return render(request, 'users/index.html')
+
+def courses(request):
+    
+    return render(request, 'users/courses.html')
+
+def about(request):
+    
+    return render(request, 'users/about.html')
+
+def team(request):
+    
+    return render(request, 'users/ourteam.html')
+
+def registration(request):
+    
+    return render(request, 'users/registration.html')
+
+def blog(request):
+    
+    return render(request, 'users/blog.html')
+
+def events(request):
+    
+    return render(request, 'users/blog.html')
+
+def faqs(request):
+    
+    return render(request, 'users/faqs.html')
+
+def contactus(request):
+    
+    return render(request, 'users/contactus.html')  
+
+
+
