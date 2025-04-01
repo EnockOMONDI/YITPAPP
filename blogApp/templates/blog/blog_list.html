@@ -1,20 +1,53 @@
-{% extends 'blog/base.html' %}
+{% extends 'users/base.html' %}
 
 {% block content %}
 {% for post in posts %}
-<div class="card">
-  <img src="{{post.img.url}}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <ul class="post-meta" style="list-style-type: none; padding-left: 0px;">
-      <li><i class="fa fa-tag"></i><a>{{post.category}}</a></li>
-      <li><i class="fa fa-comment"></i><a>{{ post.comments.all.count }} Comments</a></li>
-      <li><i class="fa fa-user"></i><a>Post By {{post.author.first_name}}</a></li>
-      <li><i class="fa fa-clock-o"></i><a>{{post.post_date | date:'d F'}}</a></li>
-    </ul>
-    <a style="text-decoration:none; color:black" href="{% url 'blog:blog-detail' post.slug %}"><h5 class="card-title">{{post.title}}</h5></a>
-    <p class="card-text">{{post.body | slice:':250' | safe}}...</p>
-    <a href="{% url 'blog:blog-detail' post.slug %}"><button type="button" class="btn btn-lg btn-dark">Read More</button></a>
+
+
+<!-- Blog Area Start -->
+<section class="blog__area pt-140 pb-120">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <h2 class="section__title text-center mb-70">Latest Blog Posts</h2>
+          </div>
+          <br>
+      </div>
+      <div class="row">
+          <!-- Blog Card 1 -->
+          <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+              <div class="blog__item white-bg mb-30 transition-3">
+                  <div class="blog__thumb w-img fix">
+                      <a href="{% url 'blog:blog-detail' post.slug %}">
+                          <img src="{{post.img.url}}" alt="Youth Empowerment">
+                      </a>
+                  </div>
+                  <div class="blog__content">
+                      <div class="blog__tag">
+                          <a href="#">#{{post.category}}</a>
+                      </div>
+                      <h3 class="blog__title">
+                          <a href="{% url 'blog:blog-detail' post.slug %}">{{post.title}}</a>
+                      </h3>
+                      <div class="blog__meta">
+                          <span><i class="far fa-calendar-alt"></i> <strong>{{post.post_date | date:'d F'}}</strong> </span>
+
+                          <span><i class="far fa-user"></i> <strong>Post By {{post.author.first_name}}</strong> </span>
+                          <span><i class="far fa-comment"></i> <strong>{{ post.comments.all.count }} Comments</strong> </span>
+                      </div>
+                      <br>
+                      <p>{{post.body | slice:':50' | safe}}...</p>
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
-</div>
+</section>
+
+
+<br><br><br><br>
+
+<!-- Blog Area Start -->
+
 {% endfor %}
 {% endblock %}

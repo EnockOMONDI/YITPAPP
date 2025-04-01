@@ -25,7 +25,7 @@ class blog(ListView):
       return context
 
 def search(request):
-   template = 'search_list.html'
+   template = 'blog/search_list.html'
    query = request.GET.get('q')
    if query:
       posts = Post.objects.filter(Q(title__icontains=query) | Q(body__icontains=query)).order_by('-post_date')
@@ -53,7 +53,7 @@ def CategoryView(request, cats):
 
 class blogdetail(DetailView):
    model = Post
-   template_name = 'blog_detail.html'
+   template_name = 'blog/blog_detail.html'
 
    def get_context_data(self, *args, **kwargs):
       cat_list = Categories.objects.all()
