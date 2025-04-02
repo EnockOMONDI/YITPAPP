@@ -174,19 +174,15 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='neondb'),
-        'USER': config('DB_USER', default='neondb_owner'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            'sslmode': 'require',
-        }
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'neondb',
+    'USER': 'neondb_owner',
+    'PASSWORD': 'npg_Ma7RYsHgW9Dy',
+    'HOST': 'ep-old-surf-ab28xwss-pooler.eu-west-2.aws.neon.tech',
+    'PORT': '5432',
+  }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -249,3 +245,10 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
     # Add to this list all the locations containing your static files 
 )
+
+UPLOADCARE = {
+  # Don’t forget to set real keys when it gets real :)
+  'pub_key': 'cda8c081e4de06393a1e', 
+  'secret': 'ad51878f56495728d5ce',
+}
+
