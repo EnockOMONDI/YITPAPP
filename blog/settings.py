@@ -80,10 +80,6 @@ CKEDITOR_CONFIGS = {
 
 
 
-UPLOADCARE = {
-    'pub_key': config('UPLOADCARE_PUBLIC_KEY'),
-    'secret': config('UPLOADCARE_SECRET_KEY'),
-}
 
 JET_THEMES = [
     {
@@ -178,9 +174,12 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'neondb',
     'USER': 'neondb_owner',
-    'PASSWORD': 'npg_Ma7RYsHgW9Dy',
+    'PASSWORD': 'npg_OJwokS6PjIm7',
     'HOST': 'ep-old-surf-ab28xwss-pooler.eu-west-2.aws.neon.tech',
     'PORT': '5432',
+    'OPTIONS': {
+        'sslmode': 'require',
+    }
   }
 }
 # Password validation
@@ -247,7 +246,6 @@ TEMPLATE_DIRS = (
 )
 
 UPLOADCARE = {
-  # Don’t forget to set real keys when it gets real :)
   'pub_key': 'cda8c081e4de06393a1e', 
   'secret': 'ad51878f56495728d5ce',
 }
