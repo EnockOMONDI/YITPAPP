@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'users.apps.UsersConfig',
     'yitp',
-    'blogapp.apps.BlogappConfig'
+    'blogapp.apps.BlogappConfig',
     'events',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -209,8 +209,7 @@ JET_SIDE_MENU_ITEMS = [
     {'label': 'Blog Management', 'items': [
         {'name': 'blogapp.post', 'label': 'Posts'},
         {'name': 'blogapp.category', 'label': 'Categories'},
-        {'name': 'blogapp.comment', 'label': 'Comments'},
-        {'name': 'blogapp.staticcontent', 'label': 'Static Content'},
+        {'name': 'blogapp.postcomment', 'label': 'Comments'},
     ]},
     {'label': 'Users', 'items': [
         {'name': 'auth.user'},
