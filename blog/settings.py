@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'jet',
     'graphene_django',
     'users.apps.UsersConfig',
-    'yitp'
+    'yitp',
     'blogapp',
     'events',
     'django.contrib.admin',
