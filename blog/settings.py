@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'users.apps.UsersConfig',
     'yitp',
-    'blogapp',  # Changed from blogApp to blogapp to match directory name
+    'blogapp.apps.BlogappConfig'
     'events',
     'django.contrib.admin',
     'django.contrib.auth',
