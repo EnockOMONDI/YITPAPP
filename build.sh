@@ -2,14 +2,14 @@
 
 # Build the project
 set -o errexit  # exit on error
-echo "Building the project JDA..."
+echo "Building the lgf."
 
 
 
 
 pip install -r requirements.txt
 
-python3 manage.py collectstatic --noinput
+python manage.py collectstatic --noinput 
 
-python3 manage.py makemigrations 
-python3 manage.py migrate 
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput

@@ -1,0 +1,1290 @@
+{% extends 'basemain.html' %}
+{% load static  %}
+
+
+{% block content %}
+<div class="preloader">
+    <img src="{% static 'assets/images/loader.png' %}" class="preloader__image" alt="">
+</div>
+    <div class="page-wrapper">
+
+        <section class="main-slider main-slider-two">
+            <div class="swiper-container thm-swiper__slider" data-swiper-options='{
+                "slidesPerView": 1,
+                "loop": true,
+                "effect": "fade",
+                "pagination": {
+                    "el": "#main-slider-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                },
+                "navigation": {
+                    "nextEl": ".main-slider-button-next",
+                    "prevEl": ".main-slider-button-prev",
+                    "clickable": true
+                },
+                "autoplay": {
+                    "delay": 5000
+                }}'>
+               
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 --> 
+                    <div class="swiper-slide">
+                        <br><br><br>
+<div class="image-layer" style="background-image: url('{% if hnew.slider_image %}{{ hnew.slider_image.cdn_url }}{% else %}{% static 'assets/images/main-slider/slider-2-1.jpg' %}{% endif %}');"></div>                       
+                        <div class="container">
+                            <div class="swiper-slide__inner">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        {% if hnew %}
+                                            <h2>{{ hnew.heading | safe }}</h2>
+                                            <p>{{ hnew.content | safe }}</p>
+                                        {% else %}
+                                            <h2>Small title here</h2>
+                                            <p>Big title here</p>
+                                        {% endif %}
+                                        <br><br>
+                                        <a href="{% url 'users:aboutus' %}" class="thm-btn">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide">
+                        <br><br><br>
+                        <div class="image-layer" style="background-image: url('{% if hneww.slider_image %}{{ hneww.slider_image.cdn_url }}{% else %}{% static 'assets/images/main-slider/slider-2-1.jpg' %}{% endif %}');"></div>                      
+                        <div class="container">
+                            <div class="swiper-slide__inner">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        {% if hneww %}
+                                            <h2>{{ hneww.heading | safe }}</h2>
+                                            <p>{{ hneww.content | safe }}</p>
+                                        {% else %}
+                                            <h2>Small title here</h2>
+                                            <p>Big title here</p>
+                                        {% endif %}
+                                        <br><br>
+                                        <a href="{% url 'users:aboutus' %}" class="thm-btn">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide"> 
+                        <br><br><br>
+                        <div class="image-layer" style="background-image: url('{% if hnewww.slider_image %}{{ hnewww.slider_image.cdn_url }}{% else %}{% static 'assets/images/main-slider/slider-2-1.jpg' %}{% endif %}');"></div>                        <div class="container">
+                            <div class="swiper-slide__inner">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        {% if hnewww %}
+                                            <h2>{{ hnewww.heading | safe }}</h2>
+                                            <p>{{ hnewww.content | safe }}</p>
+                                        {% else %}
+                                            <h2>Small title here</h2>
+                                            <p>Big title here</p>
+                                        {% endif %}
+                                        <br><br>
+                                        <a href="{% url 'users:aboutus' %}" class="thm-btn">Learn More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination" id="main-slider-pagination"></div>
+            </div>
+        </section>
+
+
+
+        <!--Charity Activity Start-->
+
+
+      
+      
+        <!--Charity Activity End-->
+        <!-- <section  class="you-can-help">
+            <div class="you-can-help-img">
+                <img src="{% static 'assets/images/resources/you_can_help_img.png' %}" alt="">
+            </div>
+            <div class="container"style="margin-top: 45px;" >
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="you-can-help__left">
+                            <div class="block-title text-left">
+                                {% if second_section %}
+                                    <h4>{{ second_section.subtitle | safe }}</h4>
+                                    <h2>{{ second_section.title | safe }}</h2>
+                                {% else %}
+                                    <h4>Green Guardians of Nairobi</h4>
+                                    <h2>Changing our community, one innovative solution at a time.</h2>
+                                {% endif %}
+                            </div>
+                            <div class="you-can-help__three-icon">
+                                <ul class="list-unstyled">
+                                    {% if second_section_icons %}
+                                        {% for icon in second_section_icons %}
+                                        <li>
+                                            <div class="icon-box">
+                                                <span class="{{ icon.icon_class }}"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>{{ icon.text | safe }}</p>
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>
+                                            <div class="icon-box">
+                                                <span class="icon-vegetable"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>Food</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon-box">
+                                                <span class="icon-water-1"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>Water</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon-box">
+                                                <span class="icon-stethoscope"></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>Medical</p>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="you-can-help__right">
+                            <div class="you-can-help__give-box">
+                                <div class="you-can-help__give-text-box" >
+                                    {% if second_section_box %}
+                                        <p >{{ second_section_box.text | safe }}</p>
+                                    {% else %}
+                                        <p>Give Education to Kids</p>
+                                    {% endif %}
+                                </div>
+                                <div class="you-can-help__icon-box">
+                                    <span class="icon-graduated"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+
+        <!--Charity Activity End-->
+        <section class="welcome-two">
+            <div class="welcome-two-hand" style="background-image: url('{% static 'assets/images/backgrounds/welcome_two_hands.png' %}')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="welcome-two__left">
+                            <div class="block-title text-left">
+
+                                {% if second_section %}
+                               
+                                <h4>{{ second_section.subtitle | safe }}</h4>
+                                <p class="welcome-two__text">{{ second_section.title | safe }}</p>
+                                
+                            {% else %}
+                                <h4>Green Guardians of Nairobi</h4>
+                                <h2>Changing our community, one innovative solution at a time.</h2>
+                            {% endif %}
+                            </div>
+                          
+                            <div class="welcome-two__btn" style="margin-top: -20px;">
+                                <a href="{% url 'users:aboutus' %}" class="programs-btn" style="border-radius: 50px;">Learn More <i class="fas fa-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6">
+                        <div class="welcome-two__right">
+                            <div class="welcome-two__img">
+                                <img src="{% static 'assets/images/resources/main2.jpg' %}" alt="">
+                                <div class="welcome-two__counter">
+                                    <h3>1,000+</h3>
+                                    <p>Trees<br> Planted</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+<section class="mission-vision" style="margin-top: -380px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="block-title text-center">
+                    <h4>Our Mission</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-3">
+                <div class="goal-item">
+                    <i class="fas fa-recycle"></i>
+                    <h4>Clean Kibera</h4>
+                    <p>Turning waste into opportunity through cutting-edge solutions.</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3">
+                <div class="goal-item">
+                    <i class="fas fa-seedling"></i>
+                    <h4>Sustainable Growth</h4>
+                    <p>Creating jobs and empowering communities for the long haul.</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3">
+                <div class="goal-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h4>Education & Empowerment</h4>
+                    <p>Inspiring kids and communities to lead on climate action.</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3">
+                <div class="goal-item">
+                    <i class="fas fa-apple-alt"></i>
+                    <h4>Nutritional Support for Sport</h4>
+                    <p>Fueling young athletes with healthy meals.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    .mission-vision {
+        padding: 120px 0;
+        background-color: #ffffff;
+    }
+    
+    .goal-item {
+        margin-bottom: 30px;
+        padding: 30px;
+        border-radius: 15px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .goal-item:hover {
+        transform: translateY(-10px);
+    }
+    
+    .goal-item i {
+        color: #00ae0f;
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+    
+    .goal-item h4 {
+        margin-bottom: 15px;
+        color: #333;
+        font-weight: 600;
+    }
+    
+    .goal-item p {
+        color: #666;
+        margin: 0;
+    }
+
+            .mission-vision {
+                padding: 120px 0;
+                background-color: #ffffff;
+            }
+            
+            .mission-box, .vision-box {
+                padding: 40px;
+                background: #fff;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            
+            .goal-item {
+                margin-bottom: 30px;
+                padding: 20px;
+                border-left: 4px solid #00ae0f;
+                background: #f9f9f9;
+            }
+            
+            .goal-item i {
+                color: #00ae0f;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .vision-box {
+                background: #00ae0f;
+                color: white;
+                position: relative;
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+            
+            .what-we-do {
+                padding: 120px 0;
+            }
+            
+            .service-card {
+                padding: 30px;
+                text-align: center;
+                background: #fff;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+                margin-bottom: 30px;
+            }
+            
+            .service-card:hover {
+                transform: translateY(-10px);
+            }
+            
+            .service-icon {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 20px;
+                background: #15c8a0;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .service-icon i {
+                color: white;
+                font-size: 32px;
+            }
+        </style>
+       
+
+       <section class="make-donation-two" style="margin-top: -80px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="make-donation-two__left">
+                        <div class="block-title text-left">
+                            <h4>What We Do</h4>
+                            <h2>Transforming Communities Through Action</h2>
+                        </div>
+                        <div class="what-we-do__list">
+                            <div class="what-we-do__item">
+                                <h4><i class="fas fa-trash-restore-alt"></i> Waste Management</h4>
+                                <p>We're tackling waste head-on with collection services, segregation, and plastic resale—turning trash into treasure and paving the way for a circular economy.</p>
+                            </div>
+                            <div class="what-we-do__item">
+                                <h4><i class="fas fa-chalkboard-teacher"></i> Community & Youth Education</h4>
+                                <p>Through school programs, clean-ups, and workshops, we're raising climate literacy and empowering the next generation of "Climate Champions" to lead change.</p>
+                            </div>
+                            <div class="what-we-do__item">
+                                <h4><i class="fas fa-chart-line"></i> Jobs & Economic Growth</h4>
+                                <p>We're creating weekly wage opportunities, especially for youth, to spark local economic growth and build stronger communities.</p>
+                            </div>
+                            <div class="what-we-do__item">
+                                <h4><i class="fas fa-utensils"></i> Nutrition for Young Athletes</h4>
+                                <p>We support local sports teams by providing nutritious meals after weekend practices, helping kids stay strong and active.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                    <div class="make-donation-two__right">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-6 mb-4">
+                                <div class="welcome-two__img">
+                                    <img src="{% static 'assets/images/resources/wastemanagement.jpg' %}" alt="Waste Management">
+                                    <h4 class="image-heading">Waste Management</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 mb-4">
+                                <div class="welcome-two__img">
+                                    <img src="{% static 'assets/images/resources/main.jpg' %}" alt="Community Education">
+                                    <h4 class="image-heading">Youth Education</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="welcome-two__img">
+                                    <img src="{% static 'assets/images/resources/jobs.jpg' %}" alt="Economic Growth">
+                                    <h4 class="image-heading">Economic Growth</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="welcome-two__img">
+                                    <img src="{% static 'assets/images/resources/nutrition.jpg' %}" alt="Nutrition Support">
+                                    <h4 class="image-heading">Nutrition Support</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <a href="{% url 'users:programs' %}" class="programs-btn">View All Programs <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <style>
+                .make-donation-two__single-img {
+                    position: relative;
+                    margin-bottom: 20px;
+                    overflow: hidden;
+                    border-radius: 10px;
+                }
+                
+                .make-donation-two__single-img img {
+                    width: 100%;
+                    height: 150px;
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+                }
+                
+                .make-donation-two__single-img:hover img {
+                    transform: scale(1.1);
+                }
+                
+                .image-heading {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    background: rgba(2, 119, 33, 0.7);
+                    color: white;
+                    padding: 10px;
+                    margin: 0;
+                    font-size: 16px;
+                    text-align: center;
+                }
+                .programs-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: #00ae0f;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0,174,15,0.2);
+}
+
+.programs-btn i {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.programs-btn:hover {
+    background: #008c0c;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,174,15,0.3);
+}
+
+.programs-btn:hover i {
+    transform: translateX(5px);
+}
+                </style>
+            </div>
+        </div>
+    </section>
+    <section class="waste-crisis">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6">
+                <div class="waste-crisis__problem">
+                    <div class="section-tag">The Problem</div>
+                    <h2>A Waste Crisis in Urban Slums</h2>
+                    <p class="lead">Urban slums like Kibera face a growing waste management crisis, where uncollected garbage clogs streets, pollutes waterways, and poses serious health risks. Limited infrastructure, lack of awareness, and economic hardships make proper waste disposal nearly impossible.</p>
+                    
+                    <h3>The consequences?</h3>
+                    <div class="consequence-list">
+                        <div class="consequence-item">
+                            <i class="fas fa-times-circle"></i>
+                            <p><strong>Environmental Degradation</strong> – Unchecked waste leads to pollution and poor sanitation.</p>
+                        </div>
+                        <div class="consequence-item">
+                            <i class="fas fa-times-circle"></i>
+                            <p><strong>Health Hazards</strong> – Accumulated trash attracts pests, spreads diseases, and worsens air quality.</p>
+                        </div>
+                        <div class="consequence-item">
+                            <i class="fas fa-times-circle"></i>
+                            <p><strong>Missed Economic Opportunities</strong> – Valuable recyclable materials are discarded instead of repurposed.</p>
+                        </div>
+                        <div class="consequence-item">
+                            <i class="fas fa-times-circle"></i>
+                            <p><strong>Lack of Climate Education</strong> – Many communities are unaware of how waste impacts their environment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-6 col-lg-6">
+                <div class="waste-crisis__solution">
+                    <div class="section-tag">Our Solution</div>
+                    <h2>Waste to Opportunity</h2>
+                    <p class="lead">At Live Great Foundation, we don't just collect waste—we create solutions that empower communities.</p>
+                    
+                    <div class="solution-list">
+                        <div class="solution-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="solution-content">
+                                <h4>Sustainable Waste Management</h4>
+                                <p>We offer waste collection, segregation, and plastic resale to reduce pollution.</p>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="solution-content">
+                                <h4>Employment for Youth</h4>
+                                <p>By turning waste into work, we create jobs and provide a steady income for young people.</p>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="solution-content">
+                                <h4>Climate Education</h4>
+                                <p>We train children and communities to become Climate Champions, driving long-term change.</p>
+                            </div>
+                        </div>
+                        <div class="solution-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="solution-content">
+                                <h4>Supporting Local Sports</h4>
+                                <p>We combine environmental efforts with nutritional support for young athletes, ensuring a healthier future.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="closing-statement">
+                        <p>By embracing a circular economy, we are transforming waste into a resource, restoring the environment, and building a model for sustainable urban living.</p>
+                        <a href="#" class="thm-btn">Join us and be part of the solution! 🌍♻️</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.waste-crisis {
+    padding: 120px 0;
+    background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+}
+
+.section-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #00ae0f;
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+.waste-crisis h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 700;
+}
+
+.lead {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.consequence-item, .solution-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.consequence-item:hover, .solution-item:hover {
+    transform: translateY(-5px);
+}
+
+.consequence-item i {
+    color: #dc3545;
+    font-size: 24px;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+
+.consequence-item p, .solution-content p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Solution Section Specific Styles */
+.waste-crisis__solution {
+    background: #00ae0f;
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+}
+
+.waste-crisis__solution .section-tag {
+    background: white;
+    color: #00ae0f;
+}
+
+.waste-crisis__solution h2,
+.waste-crisis__solution .lead,
+.waste-crisis__solution h4,
+.waste-crisis__solution p {
+    color: white;
+}
+
+.solution-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.solution-item i {
+    color: white;
+    font-size: 24px;
+    margin-right: 15px;
+    margin-top: 3px;
+}
+
+.solution-content h4 {
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.closing-statement {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.closing-statement p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.thm-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: white;
+    color: #00ae0f;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.thm-btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Problem Section Specific Styles */
+.waste-crisis__problem {
+    padding: 40px;
+}
+
+.waste-crisis__problem .consequence-item {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.waste-crisis__problem h2,
+.waste-crisis__problem h3 {
+    color: #333;
+}
+
+.waste-crisis__problem .lead {
+    color: #555;
+}
+
+.waste-crisis__problem .consequence-item p {
+    color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    .waste-crisis__problem, 
+    .waste-crisis__solution {
+        margin-bottom: 50px;
+    }
+    
+    .waste-crisis h2 {
+        font-size: 30px;
+    }
+
+    .waste-crisis__solution,
+    .waste-crisis__problem {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    .consequence-item, 
+    .solution-item {
+        padding: 15px;
+    }
+
+    .lead {
+        font-size: 16px;
+    }
+
+    .solution-content h4 {
+        font-size: 18px;
+    }
+}
+</style>
+    
+    <style>
+    .what-we-do__list {
+        margin-top: 30px;
+    }
+    
+    .what-we-do__item {
+        margin-bottom: 25px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .what-we-do__item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .what-we-do__item h4 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    
+    .what-we-do__item h4 i {
+        color: #00ae0f;
+        margin-right: 10px;
+        font-size: 20px;
+    }
+    
+    .what-we-do__item p {
+        color: #666;
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+    </style>
+        
+    
+        
+
+
+
+<section class="vision-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-6 col-lg-6">
+                <div class="vision-content">
+                    <div class="vision-tag">Our Vision</div>
+                    <div class="vision-title">
+                        {% if vision %}
+                            <h2>{{ vision.heading | safe }}</h2>
+                        {% else %}
+                            <h2>Building a Sustainable Future</h2>
+                        {% endif %}
+                    </div>
+                    <div class="vision-text">
+                        {% if vision %}
+                            <p>{{ vision.content | safe }}</p>
+                        {% else %}
+                            <p>Update Vision content in Edit Pages</p>
+                        {% endif %}
+                    </div>
+                    <div class="vision-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <p>Trees Planted</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <p>Youth Empowered</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2000+</span>
+                            <p>Lives Impacted</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+                <div class="vision-image">
+                    <img src="{% static 'assets/images/resources/ourvision.jpg' %}" alt="Our Vision">
+                    <div class="vision-shape"></div>
+                    <div class="vision-years">
+                        <span class="number">5</span>
+                        <span class="text">Years of Impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.vision-section {
+    padding: 120px 0;
+    position: relative;
+    background: #f8f9fa;
+    overflow: hidden;
+}
+
+.vision-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: #00ae0f;
+    color: white;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.vision-title h2 {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    color: #1c1c1c;
+    font-weight: 700;
+}
+
+.vision-text p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.vision-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    display: block;
+    font-size: 36px;
+    font-weight: 700;
+    color: #00ae0f;
+    margin-bottom: 5px;
+}
+
+.stat-item p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.vision-image {
+    position: relative;
+    padding: 20px;
+}
+
+.vision-image img {
+    width: 100%;
+    border-radius: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.vision-shape {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 80%;
+    background: #00ae0f;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.vision-years {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 3;
+}
+
+.vision-years .number {
+    display: block;
+    font-size: 48px;
+    font-weight: 700;
+    color: #00ae0f;
+    line-height: 1;
+}
+
+.vision-years .text {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+@media (max-width: 991px) {
+    .vision-section {
+        padding: 80px 0;
+    }
+
+    .vision-title h2 {
+        font-size: 36px;
+    }
+
+    .vision-image {
+        margin-top: 50px;
+    }
+
+    .vision-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .stat-item {
+        flex: 1 1 calc(33.333% - 10px);
+    }
+}
+
+@media (max-width: 767px) {
+    .vision-stats {
+        flex-direction: column;
+    }
+
+    .stat-item {
+        width: 100%;
+    }
+
+    .vision-years {
+        padding: 15px 20px;
+    }
+
+    .vision-years .number {
+        font-size: 36px;
+    }
+}
+</style>
+   
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="row align-items-center">
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="cta-content">
+                                <div class="cta-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <div class="cta-text">
+                                    {% if volunteer %}
+                                        <h3>{{ volunteer.content | safe }}</h3>
+                                    {% else %}
+                                        <h3>Join Our Mission to Transform Communities</h3>
+                                    {% endif %}
+                                    <p>Be part of the change. Together we can create a sustainable future for Kibera.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4">
+                            <div class="cta-button">
+                                <a href="" class="cta-btn">
+                                    Get Involved Now
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <style>
+        .cta-section {
+            padding: 80px 0;
+            position: relative;
+            background: #f8f9fa;
+        }
+        
+        .cta-card {
+            background: #00ae0f;
+            padding: 50px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,174,15,0.2);
+        }
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(100px, -150px);
+        }
+        
+        .cta-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(-100px, 100px);
+        }
+        
+        .cta-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .cta-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cta-icon i {
+            font-size: 36px;
+            color: white;
+        }
+        
+        .cta-text {
+            flex: 1;
+        }
+        
+        .cta-text h3 {
+            color: white;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .cta-text p {
+            color: rgba(255,255,255,0.9);
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        .cta-button {
+            text-align: right;
+        }
+        
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 35px;
+            background: white;
+            color: #00ae0f;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            gap: 10px;
+        }
+        
+        .cta-btn i {
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-btn:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .cta-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        @media (max-width: 991px) {
+            .cta-card {
+                padding: 30px;
+            }
+        
+            .cta-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        
+            .cta-text h3 {
+                font-size: 28px;
+            }
+        
+            .cta-button {
+                text-align: center;
+                margin-top: 30px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .cta-text h3 {
+                font-size: 24px;
+            }
+        
+            .cta-text p {
+                font-size: 16px;
+            }
+        
+            .cta-btn {
+                width: 100%;
+                padding: 15px 25px;
+            }
+        }
+        </style>
+
+
+
+
+
+
+
+
+
+
+    </div><!-- /.page-wrapper -->
+
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fa fa-angle-up"></i></a>
+
+
+
+
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay side-menu__toggler mobile-nav__toggler"></div>
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close side-menu__toggler mobile-nav__toggler">
+                <i class="fa fa-times"></i>
+            </span>
+            <div class="logo-box">
+              
+            </div>
+            <!-- /.logo-box -->
+            <div class="mobile-nav__container clearfix"></div>
+            <!-- /.mobile-nav__container -->
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="info@livegreatfoundation.org">info@livegreatfoundation.org</a>
+                </li>
+                <li>
+                    <i class="fas fa-phone-square-alt"></i>
+                    <a href="tel:+254-712-402-483">+254 712 402 483</a>
+                </li>
+            </ul><!-- /.mobile-nav__contact -->
+            <div class="mobile-nav__top">
+                <div class="mobile-nav__social">
+                    <a href="https://twitter.com/kefegod" target="_blank" aria-label="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="facebook"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#" aria-label="pinterest"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="https://www.instagram.com/livegreatfoundation/"  target="_blank" aria-label="instagram"><i class="fab fa-instagram"></i></a>
+                </div><!-- /.mobile-nav__social -->
+            </div><!-- /.mobile-nav__top -->
+        </div>
+    </div>
+
+
+
+    <div class="search-popup">
+        <div class="search-popup__overlay custom-cursor__overlay">
+            <div class="cursor"></div>
+            <div class="cursor-follower"></div>
+        </div><!-- /.search-popup__overlay -->
+        <div class="search-popup__inner">
+            <form action="#" class="search-popup__form">
+                <input type="text" name="search" placeholder="Type here to Search....">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+
+
+ 
+
+
+
+{% include 'footer.html' %}
+
+{% endblock %}

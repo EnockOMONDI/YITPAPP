@@ -1,0 +1,167 @@
+{% extends 'yitp/base.html' %}
+{% load static %}
+
+{% block content %} 
+
+  <style>
+   .card {
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    background: #fff;
+    box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+-webkit-box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+-moz-box-shadow: 0px 8px 20px 2px rgba(255,138,0,0.24);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    
+    
+}
+  </style>
+
+   <!-- Hero Section -->
+   <section class="page__title-area pt-120 pb-90">
+      <br><br>
+      <div class="container">
+         <div class="row">
+            <div class="col-xxl-12">
+               <div class="page__title-content mb-50 text-center">
+                  <h2 class="section__title">How to Get Started</h2>
+                  <p>Join our transformative Youth Impact Training Programme in 3 simple steps</p>
+               </div>
+            </div>
+         </div>
+         
+      </div>
+   </section>
+
+   <!-- Registration Steps -->
+   <section class="steps__area pb-120">
+      <div class="container">
+         <div class="row">
+            <!-- Step 1 -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+               <div class="feature__item text-center mb-30 transition-3 white-bg">
+                  <div class="feature__icon mb-30">
+                     <span class="step-number"> <strong>1</strong> </span>
+                  </div>
+                  <div class="feature__content">
+                     <h3>Complete Registration Form</h3>
+                     <p>Fill in our quick enrolment form to reserve your spot</p>
+                     <a href="{% url 'yitp:registration2' %}"class="e-btn">Register Now</a>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Step 2 -->
+         <!-- Course Fee -->
+         <div class="col-xxl-4 col-xl-4 col-lg-4">
+            <div class="feature__item text-center mb-30 transition-3 white-bg">
+               <div class="feature__icon mb-30">
+                  <span class="step-number"> <strong>2</strong></span>
+               </div>
+               <div class="feature__content">
+                  <h3>Make Payment</h3>
+                  <h4><strike>Regular Price: KES 35,000 ($270)</strike></h4>
+                  <h3 class="special-offer">Limited Time Offer: KES 5,000 ($39)</h3>
+                  <p>Pay in 2 easy installments of KES 2,500 ($20)</p>
+                  
+               </div>
+            </div>
+         </div>
+
+            <!-- Step 3 -->
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6">
+               <div class="feature__item text-center mb-30 transition-3 white-bg">
+                  <div class="feature__icon mb-30">
+                     <span class="step-number">3</span>
+                  </div>
+                  <div class="feature__content">
+                     <h3>Start Learning</h3>
+                     <p>Receive your course schedule and access to learning materials</p>
+                     <p>Join our vibrant learning community</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <div class="container card" style="padding: 30px;">
+      <div class="col-xxl-12 col-xl-12 col-lg-12 text-center">
+         <div class="feature__content">
+            <h2>Payment Options</h2>
+          
+         </div>
+      </div>
+      <br>
+      <div class="row">
+         <!-- Payment Options Header -->
+       
+   
+         <!-- Bank Transfer -->
+         <div class="col-xxl-6 col-xl-6 col-lg-6">
+            <div class="feature__item text-center mb-30 transition-3 white-bg">
+               <div class="feature__icon mb-30">
+                  <i class="fas fa-university"></i>
+               </div>
+               <div class="feature__content">
+                  <h3>Bank Transfer/Mpesa paybill</h3>
+                  <ul class="text-center" style="list-style: none; padding: 0;">
+                     <li><strong>Bank:</strong> Absa Bank</li>
+                     <li><strong>Paybill:</strong> 303030</li>
+                     <li><p><strong>Account Number:</strong> 2046381648 </p></li>
+                     <li>
+                        <p><strong>Account Name:</strong><span>Narrow passes</span> </p></li>
+                  </ul>
+                  <div class="mt-20">
+                     <p>After payment, please send confirmation to: info@youthimpactglobal.com or click the button below to send confirmation</p>
+                     <a href="mailto:info@youthimpactglobal.com" class="e-btn">Send Confirmation</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+   
+         <!-- Course Fee -->
+         <div class="col-xxl-6 col-xl-6 col-lg-6">
+            <div class="feature__item text-center mb-30 transition-3 white-bg">
+               <div class="feature__icon mb-30">
+                  <i class="fas fa-tags"></i>
+               </div>
+               <div class="feature__content">
+                  <h3>Pay now</h3>
+                  <h4><strike>Regular Price: KES 35,000 ($270)</strike></h4>
+                  <h3 class="special-offer">Limited Time Offer: KES 5,000 ($39)</h3>
+                  <p>Pay in 2 easy instalments of KES 2,500 ($20)</p>
+                  <div class="mt-30">
+                     <a href="https://www.paypal.com/ncp/payment/FUAJVJ66L978C" target="_blank" class="e-btn">Pay with PayPal</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+
+
+   <!-- Contact Support -->
+   <section class="contact__info pt-120 pb-120">
+      <div class="container">
+         <div class="row">
+            <div class="col-xxl-12">
+               <div class="section__title-wrapper text-center mb-60">
+                  <h2>Need Help?</h2>
+                  <p>Our support team is here to assist you</p>
+                  <a href="{% url 'yitp:contact' %}" class="e-btn">Contact us</a>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   {% include 'yitp/footer.html' %}
+       
+     
+   {% endblock %}

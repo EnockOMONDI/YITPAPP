@@ -1,0 +1,77 @@
+
+
+
+
+
+        {% load static %}
+<div class="site-header__header-three-wrap clearfix">
+
+    <div class="container">
+        <header class="main-nav__header-three">
+            <nav class="header-navigation stricky original">
+                <div class="main-nav__header-three__content-box clearfix">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="main-nav__left main-nav__left-three float-left">
+                        <div class="logo">
+                            <a href="{% url 'users:home' %}"><img src="{% static 'assets/images/resources/log33.png' %}" width="57%"  alt="" style="margin: 8px; padding-left: 30px;" ></a>
+                        </div>
+                        <a href="#" class="side-menu__toggler">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="main-nav__main-navigation main-nav__main-navigation__three float-left clearfix">
+                        <ul class=" main-nav__navigation-box float-left">
+                            <!-- <li>
+                                <a href="{% url 'users:home' %}">Home</a>
+                            </li> -->
+                            <li>
+                                <a href="{% url 'users:aboutus' %}">Who we are</a>
+                            </li>
+                            
+                            <li class="dropdown">
+                                <a href="">Programs<button class="dropdown-btn"></button></a>
+                                <ul style="min-width: 300px;">
+                                    <li><a href="{% url 'users:programs' %}#waste-management">Waste Management</a></li>
+                                    <li><a href="{% url 'users:programs' %}#youth-education">Community & Youth Education</a></li>
+                                    <li><a href="{% url 'users:programs' %}#economic-growth">Jobs & Economic Growth</a></li>
+                                    <li><a href="{% url 'users:programs' %}#nutrition">Nutrition for Young Athletes</a></li>
+                                    <li><a href="{% url 'users:programs' %}">Goddess Care Initiative</a></li>
+                                </ul><!-- /.sub-menu -->
+                            </li>
+                            
+
+                            <li>
+                                <a href="{% url 'events:event_list' %}">Events</a>
+                            </li>
+                          
+                            <!-- <li>
+                                <a href="{% url 'users:ourteam' %}">Our team</a>
+                            </li> -->
+                            <li>
+                                <a href="{% url 'blogapp:blog-list' %}">Blogs</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users:contactus' %}">Contact Us</a>
+                            </li>
+                           
+                           
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                    <!-- <div class="main-nav__right-three float-right">
+                        <div class="main-nav__right__btn-one">
+                            <a href="campaigns.html"><i class="fas fa-heart"></i>Donate</a>
+                        </div>
+                    
+                        <div class="main-nav__right__icon-search-box">
+                            <a href="#" class="main-nav__search search-popup__toggler">
+                                <i class="icon-magnifying-glass"></i>
+                            </a>
+                        </div>
+                    </div> -->
+                </div>
+            </nav>
+            
+  
+        </header>
+    </div>
+</div>

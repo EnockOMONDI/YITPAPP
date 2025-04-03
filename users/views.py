@@ -1,6 +1,107 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox
+
+from django.shortcuts import render,redirect,HttpResponse
+from django.http import Http404
+
+
+def home(request):
+    # Fetch all the sections from the database based on the section names
+    hnew = Editpage.objects.filter(section_name='hnew').first()
+    hneww = Editpage.objects.filter(section_name='hneww').first()
+    hnewww = Editpage.objects.filter(section_name='hnewww').first()
+    Programme1 = Editpage.objects.filter(section_name='Programme1').first()
+    Programme2 = Editpage.objects.filter(section_name='Programme2').first()
+    Programme3 = Editpage.objects.filter(section_name='Programme3').first()
+    about_us = Editpage.objects.filter(section_name='about_us').first()
+    mission = Editpage.objects.filter(section_name='mission').first()
+    vision = Editpage.objects.filter(section_name='vision').first()
+    volunteer = Editpage.objects.filter(section_name='Volunteer').first()
+    footer = Editpage.objects.filter(section_name='footer').first()
+    team1 = Editpage.objects.filter(section_name='team1').first()
+    team2 = Editpage.objects.filter(section_name='team2').first()
+    team3 = Editpage.objects.filter(section_name='team3').first()
+    home_section = Editpage.objects.filter(section_name='home_section').first()
+    second_section = SecondSection.objects.first()
+    second_section_icons = SecondSectionIcon.objects.all().order_by('order')
+    second_section_box = SecondSectionBox.objects.first()
+
+    # Add all the variables to the context dictionary
+    content = {
+        'Programme1': Programme1,
+        'Programme2': Programme2,
+        'Programme3': Programme3,
+        'hnew': hnew,
+        'hneww': hneww,
+        'hnewww': hnewww,
+        'about_us': about_us,
+        'mission': mission,
+        'vision': vision,
+        'volunteer': volunteer,
+        'footer': footer,
+        'team1': team1,
+        'team2': team2,
+        'team3': team3,
+        'second_section': second_section ,
+        'second_section_icons': second_section_icons,
+        'second_section_box': second_section_box,
+        
+        
+    }
+
+    return render(request, 'index.html', content)
+
+def aboutus(request):
+    aboutUs = Editpage.objects.filter(section_name='aboutUs').first()
+    footer = Editpage.objects.filter(section_name='footer').first()
+    volunteer = Editpage.objects.filter(section_name='Volunteer').first()
+    content = {
+        'volunteer': volunteer,
+        'footer': footer,
+        'aboutUs': aboutUs,
+        
+    }
+    
+    return render(request, 'aboutus.html', content)
+
+def programs(request):
+    footer = Editpage.objects.filter(section_name='footer').first()
+    our_programs = Editpage.objects.filter(section_name='our_Programs').first()
+    reach = Editpage.objects.filter(section_name='reach').first()
+    volunteer = Editpage.objects.filter(section_name='Volunteer').first()
+
+    content = {
+        'our_programs': our_programs,
+        'footer': footer,
+        'reach': reach,
+        'volunteer': volunteer,
+       
+    }
+    return render(request, 'programs.html', content)
+
+def ourteam(request):
+    volunteer = Editpage.objects.filter(section_name='Volunteer').first()
+    footer = Editpage.objects.filter(section_name='footer').first()
+    team1 = Editpage.objects.filter(section_name='team1').first()
+    team2 = Editpage.objects.filter(section_name='team2').first()
+    team3 = Editpage.objects.filter(section_name='team3').first()
+    content = {
+       
+        'volunteer': volunteer,
+        'footer': footer,
+        'team1': team1,
+        'team2': team2,
+        'team3': team3,
+     
+    }
+    
+    return render(request, 'ourteam.html', content)
+
+def contactus(request):
+    
+    return render(request, 'contactus.html')
 
 # Create your views here.
 def register(request):
@@ -47,73 +148,3 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return render(request, 'logout.html')
-
-def home(request):
-    
-    return render(request, 'users/index.html')
-
-def courses(request):
-    
-    return render(request, 'users/courses.html')
-
-def about(request):
-    
-    return render(request, 'users/about.html')
-
-def team(request):
-    
-    return render(request, 'users/ourteam.html')
-
-def registration(request):
-    
-    return render(request, 'users/registration.html')
-
-def registration2(request):
-    
-    return render(request, 'users/registration2.html')
-
-
-def events(request):
-    
-    return render(request, 'users/events.html')
-
-def faqs(request):
-    
-    return render(request, 'users/faqs.html')
-
-def contact(request):
-    
-    return render(request, 'users/contact.html') 
-    
-
-def coursedetail1(request):
-    
-    return render(request, 'users/coursedetail1.html')   
-
-def coursedetail2(request):
-    
-    return render(request, 'users/coursedetail2.html')
-
-def coursedetail3(request):
-    
-    return render(request, 'users/coursedetail3.html')  
-
-def coursedetail4(request):
-    
-    return render(request, 'users/coursedetail4.html')      
-
-def coursedetail5(request):
-    
-    return render(request, 'users/coursedetail5.html')
-
-def coursedetail6(request):
-    
-    return render(request, 'users/coursedetail6.html')
-
-
-
-
-
-
-
-

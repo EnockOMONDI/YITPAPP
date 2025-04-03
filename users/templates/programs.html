@@ -1,0 +1,355 @@
+{% extends 'basemain.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Programs Hero -->
+<section class="programs-hero" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="programs-hero__content">
+                    <h1>Our Programs</h1>
+                    <p class="lead">Transforming Communities Through Innovative Solutions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Waste Management Program -->
+<section id="waste-management" class="program-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="program-content">
+                    <div class="program-tag">Environmental Impact</div>
+                    <h2>Waste Management</h2>
+                    <p class="lead">Transforming waste into opportunity through innovative collection and recycling systems.</p>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <i class="fas fa-recycle"></i>
+                            <h4>Waste Collection</h4>
+                            <p>Organized collection points and regular pickup schedules throughout Kibera.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-sort-amount-down"></i>
+                            <h4>Waste Segregation</h4>
+                            <p>Systematic sorting of recyclables, organics, and non-recyclable materials.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-dollar-sign"></i>
+                            <h4>Plastic Resale</h4>
+                            <p>Converting collected plastics into revenue through strategic partnerships.</p>
+                        </div>
+                    </div>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="number">5000+</span>
+                            <p>Kg Waste Collected Monthly</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="number">70%</span>
+                            <p>Recycling Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="program-image">
+                    <img src="{% static 'assets/images/resources/waste.png' %}" alt="Waste Management">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Youth Education Program -->
+<section id="youth-education" class="program-section bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="program-image">
+                    <img src="{% static 'assets/images/resources/main.jpg' %}" alt="Youth Education">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="program-content">
+                    <div class="program-tag">Educational Impact</div>
+                    <h2>Community & Youth Education</h2>
+                    <p class="lead">Empowering the next generation with climate literacy and environmental awareness.</p>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h4>Climate Literacy</h4>
+                            <p>Comprehensive education programs on climate change and environmental conservation.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-users"></i>
+                            <h4>Community Workshops</h4>
+                            <p>Regular workshops engaging community members in environmental initiatives.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-book"></i>
+                            <h4>Leadership Guide</h4>
+                            <p>Training materials for developing Climate Champions in the community.</p>
+                        </div>
+                    </div>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="number">1000+</span>
+                            <p>Youth Educated</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="number">50+</span>
+                            <p>Climate Champions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Economic Growth Program -->
+<section id="economic-growth" class="program-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="program-content">
+                    <div class="program-tag">Economic Impact</div>
+                    <h2>Jobs & Economic Growth</h2>
+                    <p class="lead">Creating sustainable employment opportunities through waste management initiatives.</p>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <i class="fas fa-briefcase"></i>
+                            <h4>Job Creation</h4>
+                            <p>Employment opportunities in waste collection, sorting, and recycling.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <h4>Skills Training</h4>
+                            <p>Professional development and business skills workshops.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-handshake"></i>
+                            <h4>Business Partnerships</h4>
+                            <p>Connecting youth with local businesses and opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="number">200+</span>
+                            <p>Jobs Created</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="number">80%</span>
+                            <p>Youth Employment</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="program-image">
+                    <img src="{% static 'assets/images/resources/jobs2.png' %}" alt="Economic Growth">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Nutrition Program -->
+<section id="nutrition" class="program-section bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="program-image">
+                    <img src="{% static 'assets/images/resources/nutrition.jpg' %}" alt="Nutrition Support">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="program-content">
+                    <div class="program-tag">Health Impact</div>
+                    <h2>Nutrition for Young Athletes</h2>
+                    <p class="lead">Supporting local sports teams with nutritious meals and dietary education.</p>
+                    <div class="program-features">
+                        <div class="feature-item">
+                            <i class="fas fa-apple-alt"></i>
+                            <h4>Meal Program</h4>
+                            <p>Regular nutritious meals for young athletes during training and events.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-heartbeat"></i>
+                            <h4>Health Education</h4>
+                            <p>Workshops on nutrition, health, and athletic performance.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-running"></i>
+                            <h4>Sports Support</h4>
+                            <p>Equipment and resources for local sports teams.</p>
+                        </div>
+                    </div>
+                    <div class="program-stats">
+                        <div class="stat-item">
+                            <span class="number">300+</span>
+                            <p>Athletes Supported</p>
+                        </div>
+                        <div class="stat-item">
+                            <span class="number">1000+</span>
+                            <p>Meals Provided Monthly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Get Involved -->
+<section class="get-involved">
+    <div class="container">
+        <div class="get-involved-card">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h2>Join Us in Making a Difference</h2>
+                    <p>Support our programs and help us create lasting change in our communities.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="{% url 'users:contactus' %}" class="thm-btn">Get Involved Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Programs Page Styles */
+.programs-hero {
+    padding: 100px 0 50px;
+    color: white;
+}
+
+.programs-hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.program-section {
+    padding: 100px 0;
+}
+
+.program-section.bg-light {
+    background: #f8f9fa;
+}
+
+.program-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #00ae0f;
+    color: white;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.program-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.program-features {
+    margin: 40px 0;
+}
+
+.feature-item {
+    margin-bottom: 30px;
+}
+
+.feature-item i {
+    color: #00ae0f;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.feature-item h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.program-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item .number {
+    font-size: 36px;
+    font-weight: 700;
+    color: #00ae0f;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.program-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.get-involved {
+    padding: 100px 0;
+    background: #f8f9fa;
+}
+
+.get-involved-card {
+    background: #00ae0f;
+    padding: 50px;
+    border-radius: 20px;
+    color: white;
+}
+
+.get-involved-card h2 {
+    margin-bottom: 20px;
+}
+
+.get-involved-card .thm-btn {
+    background: white;
+    color: #00ae0f;
+}
+
+.get-involved-card .thm-btn:hover {
+    background: #333;
+    color: white;
+}
+
+@media (max-width: 991px) {
+    .program-section {
+        padding: 60px 0;
+    }
+    
+    .program-content {
+        margin-top: 40px;
+    }
+    
+    .program-stats {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .get-involved-card {
+        text-align: center;
+    }
+    
+    .get-involved-card .text-lg-end {
+        text-align: center;
+        margin-top: 30px;
+    }
+}
+</style>
+
+{% endblock %}

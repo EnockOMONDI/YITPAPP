@@ -1,73 +1,89 @@
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic import ListView, DetailView
-from .models import Post, Categories, PostComment
-from django.db.models import Q
-from django.contrib.auth.decorators import login_required
+from blogapp.models import Post, Category, Comment
+from django.contrib import messages
+from django.db.models import Q, Count
 from django.core.paginator import Paginator
-from django.http import HttpResponseNotFound, Http404
 
-# Create your views here.
-class blog(ListView):
-   model = Post
-   template_name = 'blog/blog_list.html'
-   context_object_name = 'posts'
-   cats = Categories.objects.all()
-   ordering = ['-post_date']  
-   paginate_by = 2
 
-   def get_context_data(self, *args, **kwargs):
-      cat_list = Categories.objects.all()
-      latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-      context = super(blog, self).get_context_data(*args, **kwargs)
-      context["cat_list"] = cat_list
-      context["latestpost_list"] = latestpost_list
-      return context
+def blogList(request):
+    blog_count = Post.objects.filter(status="published")
+    blog = Post.objects.filter(status="published").order_by("-id")
+    featured_blog = Post.objects.filter(featured=True, status="published").order_by("-id")[:6]
+    categories = Category.objects.filter(active=True)
 
-def search(request):
-   template = 'blog/search_list.html'
-   query = request.GET.get('q')
-   if query:
-      posts = Post.objects.filter(Q(title__icontains=query) | Q(body__icontains=query)).order_by('-post_date')
-   else:
-      posts = Post.objects.all()
-   
-   cat_list = Categories.objects.all()
-   latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-   paginator = Paginator(posts, 2)
-   page = request.GET.get('page')
-   posts = paginator.get_page(page)
-   return render(request, template, {'posts':posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list, 'query':query})
+    query = request.GET.get("q")
+    if query:
+        blog = blog.filter(
+            Q(title__icontains=query)).distinct()
 
-def CategoryView(request, cats):
-   if Categories.objects.filter(categoryname=cats).exists():
-      category_posts = Post.objects.filter(category__categoryname=cats).order_by('-post_date')
-      cat_list = Categories.objects.all()
-      latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-      paginator = Paginator(category_posts, 2)
-      page = request.GET.get('page')
-      category_posts = paginator.get_page(page)
-      return render(request, 'category_list.html', {'cats':cats, 'category_posts':category_posts, 'cat_list': cat_list, 'latestpost_list':latestpost_list})
-   else:
-      raise Http404
+    paginator = Paginator(blog, 15)
+    page_number = request.GET.get('page')
+    blog = paginator.get_page(page_number)
+    
+    
 
-class blogdetail(DetailView):
-   model = Post
-   template_name = 'blog/blog_detail.html'
+    context = {
+        "query": query,
+        "categories": categories,
+        "blog_count": blog_count,
+        "blog": blog,
+        "featured_blog": featured_blog,
+    }
+    return render(request, 'bloglist.html', context)
 
-   def get_context_data(self, *args, **kwargs):
-      cat_list = Categories.objects.all()
-      latestpost_list = Post.objects.all().order_by('-post_date')[:3]
-      context = super(blogdetail, self).get_context_data(*args, **kwargs)
-      context["cat_list"] = cat_list
-      context["latestpost_list"] = latestpost_list
-      return context
+def blogDetail(request, pid):
+    post = Post.objects.get(status="published", pid=pid)
+    comment = Comment.objects.filter(post=post, active=True)
+    blogs = Post.objects.filter(status="published").order_by("-id")[:10]
+    related_blogs = Post.objects.filter(category=post.category).order_by("-id")[:12]
 
-@login_required(login_url='/login')
-def send_comment(request, slug):
-   message = request.POST.get('message')
-   post_id = request.POST.get('post_id')
-   post_comment = PostComment.objects.create(sender=request.user, message=message)
-   post = Post.objects.filter(id=post_id).first()
-   post.comments.add(post_comment)
-   return redirect('.')
+    post.views += 1
+    post.save()
+
+
+    if request.method == "POST":
+        full_name = request.POST.get("full_name")
+        comment = request.POST.get("comment")
+        email = request.POST.get("email")
+
+        Comment.objects.create(full_name=full_name, email=email ,comment=comment, post=post)
+        messages.success(request, f"Hey {full_name}, your comment have posted.")
+
+    context = {
+        "post": post,
+        "comment": comment,
+        "blogs": blogs,
+        "related_blogs":related_blogs
+    }
+    return render(request, 'blogdetail.html', context)
+    
+
+
+def category_detail(request, slug):
+    category = Category.objects.get(slug=slug)
+    blog_count = Post.objects.filter(category=category, status="published")
+    blog = Post.objects.filter(category=category, status="published")
+    categories = Category.objects.filter(active=True)
+    
+    query = request.GET.get("q")
+    if query:
+        blog = blog.filter(
+            Q(title__icontains=query)).distinct()
+
+    paginator = Paginator(blog, 2)
+    page_number = request.GET.get('page')
+    blog = paginator.get_page(page_number)
+    
+    
+
+    context = {
+        "blog_count": blog_count,
+        "query": query,
+        "blog": blog,
+        "category": category,
+        "categories": categories,
+    }
+    return render(request, 'blog/category-detail.html', context)
+
+
+

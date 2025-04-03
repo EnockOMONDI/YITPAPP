@@ -1,0 +1,98 @@
+{% extends 'basemain.html' %}
+{% load static  %}
+
+
+{% block content %}
+<div class="container py-5">
+    <!-- Event Details -->
+    <div class="row mb-5">
+        <div class="col-md-8">
+            {% if event.image %}
+            <img src="{{ event.image.url }}" class="img-fluid rounded mb-4" alt="{{ event.title }}">
+            {% endif %}
+            
+            <h1 class="mb-3">{{ event.title }}</h1>
+            
+            <div class="d-flex gap-3 mb-4">
+                <span class="badge bg-{% if event.event_type == 'ONLINE' %}success{% else %}primary{% endif %}">
+                    {{ event.get_event_type_display }}
+                </span>
+                <span class="badge bg-secondary">
+                    {{ event.category.name }}
+                </span>
+                <span class="text-muted">
+                    <i class="fas fa-eye"></i> {{ event.views }} views
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <p>
+                    <i class="fas fa-calendar-alt"></i> {{ event.date|date:"M d, Y H:i" }}<br>
+                    {% if event.event_type == 'ONLINE' %}
+                        <i class="fas fa-link"></i> <a href="{{ event.online_url }}" target="_blank">{{ event.online_url }}</a>
+                    {% else %}
+                        <i class="fas fa-map-marker-alt"></i> {{ event.location }}
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="event-content">
+                {{ event.description|safe }}
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Comments ({{ comments.count }})</h5>
+                    
+                    {% for comment in comments %}
+                    <div class="mb-3">
+                        <strong>{{ comment.name }}</strong>
+                        <small class="text-muted">{{ comment.created_at|date:"M d, Y" }}</small>
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                    {% empty %}
+                    <p>No comments yet. Be the first to comment!</p>
+                    {% endfor %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="comment" class="form-control" rows="3" placeholder="Your Comment" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-dark">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Events -->
+    {% if related_events %}
+    <div class="row mt-5">
+        <h3>Related Events</h3>
+        {% for event in related_events %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if event.image %}
+                <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.title }}</h5>
+                    <a href="{% url 'event_detail' event.id %}" class="btn btn-outline-dark">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
