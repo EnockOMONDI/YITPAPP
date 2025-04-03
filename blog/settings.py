@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'jet',
     'graphene_django',
     'users.apps.UsersConfig',
+    'yitp'
     'blogapp',
     'events',
     'django.contrib.admin',
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'ckeditor',
     'taggit',
     'import_export',
