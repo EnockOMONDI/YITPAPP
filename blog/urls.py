@@ -25,8 +25,9 @@ from graphene_django.views import GraphQLView
 from django.views.decorators.csrf import csrf_exempt
 
 
+
+
 urlpatterns = [
-    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Must come before jet/ URL
     path('jet/', include('jet.urls', 'jet')),  # Django Jet URLS
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
@@ -37,8 +38,7 @@ urlpatterns = [
     path('users', include('users.urls')), 
     path('blogs/', include('blogapp.urls')),
     path('events/', include('events.urls')),
-  
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
-
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

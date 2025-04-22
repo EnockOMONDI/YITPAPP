@@ -34,25 +34,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application definition
 
 INSTALLED_APPS = [
-    'jet.dashboard',  # Add this line before 'jet'  
-    'jet',
-    'users.apps.UsersConfig',
-    'yitp.apps.YitpConfig',
-    'blogapp.apps.BlogappConfig',
-    'events.apps.EventsConfig',
+    'jet',  # Remove jet.dashboard for now
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_django',  # Add this line
+    'users.apps.UsersConfig',
+    'yitp.apps.YitpConfig',
+    'blogapp.apps.BlogappConfig',
+    'events.apps.EventsConfig',
+    'graphene_django',
     'ckeditor',
     'ckeditor_uploader',
     'taggit',
     'import_export',
-    
 ]
+
+# Remove or comment out JET_INDEX_DASHBOARD setting
+# JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 
 
 GRAPHENE = {
@@ -201,4 +202,3 @@ JET_SIDE_MENU_ITEMS = [
 ]
 
 # Additional Jet settings
-JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultIndexDashboard'
