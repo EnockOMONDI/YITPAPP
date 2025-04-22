@@ -9,6 +9,6 @@ echo "Building the lgf."
 
 pip install -r requirements.txt
 
-python manage.py migrate app_name zero
+
 python manage.py makemigrations
 python manage.py migrate

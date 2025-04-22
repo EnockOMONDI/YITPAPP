@@ -45,10 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_ckeditor_5',
+    'ckeditor',
+    'ckeditor_uploader',
     'taggit',
     'import_export',
-    'ckeditor_uploader',
+    
 ]
 
 
@@ -165,6 +166,15 @@ UPLOADCARE = {
 }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}
 
 JET_DEFAULT_THEME = 'green'
 JET_THEMES = [
