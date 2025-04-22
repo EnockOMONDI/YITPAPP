@@ -48,3 +48,6 @@ shortuuid>=1.0.13
 coverage>=7.4.1
 pytest>=8.0.0
 pytest-django>=4.7.0
+
+# CKEditor
+django-ckeditor-5>=1.0.0
