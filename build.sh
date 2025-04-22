@@ -9,9 +9,7 @@ pip install -r requirements.txt
 mkdir -p staticfiles
 mkdir -p media/uploads
 
-# Remove existing migrations (optional, use with caution)
-find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
-find . -path "*/migrations/*.pyc" -delete
+
 
 # Make fresh migrations
 python manage.py makemigrations jet
