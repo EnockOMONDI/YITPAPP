@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-s
-    'django_ckeditor_5'
+    'django_ckeditor_5',
     'taggit',
     'import_export',
     'ckeditor_uploader',
