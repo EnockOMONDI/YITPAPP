@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'yitp'  # This helps with URL namespacing
+app_name = 'yitp'  
 
 urlpatterns = [
     path('', views.home, name='home'),
