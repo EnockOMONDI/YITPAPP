@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'graphene_django',  # Add this line
     'ckeditor',
     'ckeditor_uploader',
     'taggit',
@@ -53,6 +54,9 @@ INSTALLED_APPS = [
 ]
 
 
+GRAPHENE = {
+    'SCHEMA': 'blog.schema.schema'
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -51,3 +51,8 @@ pytest-django>=4.7.0
 
 # CKEditor
 django-ckeditor==6.6.0
+
+# GraphQL
+graphene-django>=3.2.0
+graphql-core>=3.2.0
+graphql-relay>=3.2.0
