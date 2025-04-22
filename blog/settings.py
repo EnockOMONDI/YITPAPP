@@ -35,7 +35,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INSTALLED_APPS = [
     'jet',
-    'graphene_django',
     'users.apps.UsersConfig',
     'yitp.apps.YitpConfig',
     'blogapp.apps.BlogappConfig',
@@ -46,11 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    'ckeditor',
+
     'taggit',
     'import_export',
-    'ckeditor_uploader',
+ 
 ]
 
 
