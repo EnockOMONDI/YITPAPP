@@ -17,5 +17,8 @@ python manage.py migrate jet --fake-initial
 # Then run all other migrations
 python manage.py migrate --fake-initial
 
+# Remove the reference to .svg files in the Font Awesome CSS
+sed -i'.bak' '/\.svg/d' static/assets/css/fontAwesome5Pro.css
+
 # Collect static files
 python manage.py collectstatic --noinput
