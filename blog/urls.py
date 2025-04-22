@@ -26,6 +26,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 urlpatterns = [
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Must come before jet/ URL
     path('jet/', include('jet.urls', 'jet')),  # Django Jet URLS
     path('admin/', admin.site.urls),
     path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
