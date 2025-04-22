@@ -20,11 +20,15 @@ from django.conf.urls.static import static
 from graphene_django.views import GraphQLView
 
 from users import views as user_views
+from django.urls import path
+from graphene_django.views import GraphQLView
+from django.views.decorators.csrf import csrf_exempt
+
 
 urlpatterns = [
     path('jet/', include('jet.urls', 'jet')),  # Django Jet URLS
     path('admin/', admin.site.urls),
-    path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True))),
     path('register/', user_views.register, name='register'),
     path('login/', user_views.login, name='login'),
     path('logout/', user_views.logout, name='logout'),

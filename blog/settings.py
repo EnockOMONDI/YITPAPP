@@ -34,6 +34,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',  # Add this line before 'jet'  
     'jet',
     'users.apps.UsersConfig',
     'yitp.apps.YitpConfig',
@@ -92,7 +93,9 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 WHITENOISE_MANIFEST_STRICT = False
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+JET_SIDE_MENU_COMPACT = True
+JET_CHANGE_FORM_SIBLING_LINKS = True
+JET_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 
 DATABASES = {
   'default': {
