@@ -6,7 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.conf import settings
+from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox, SponsorshipRequest
+from .forms import SponsorshipRequestForm
 
 from django.shortcuts import render,redirect,HttpResponse
 from django.http import Http404
@@ -249,7 +253,92 @@ def logout(request):
 
 @login_required
 def profile(request):
-    """User profile view - requires authentication"""
+    """User profile view with sponsorship request functionality"""
+    # Get user's sponsorship requests
+    sponsorship_requests = SponsorshipRequest.objects.filter(user=request.user).order_by('-created_at')
+
+    # Handle sponsorship request form submission
+    if request.method == 'POST':
+        form = SponsorshipRequestForm(request.POST, request.FILES)
+        form.user = request.user  # Set user for validation
+
+        if form.is_valid():
+            sponsorship_request = form.save(commit=False)
+            sponsorship_request.user = request.user
+            sponsorship_request.save()
+
+            # Send email notifications
+            try:
+                send_sponsorship_emails(sponsorship_request)
+                messages.success(
+                    request,
+                    'Your sponsorship request has been submitted successfully! '
+                    'You will receive a confirmation email shortly, and our team will review your request.'
+                )
+            except Exception as e:
+                messages.warning(
+                    request,
+                    'Your sponsorship request was submitted, but there was an issue sending the confirmation email. '
+                    'Our team will still review your request.'
+                )
+
+            return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the errors below and try again.')
+    else:
+        form = SponsorshipRequestForm()
+
     return render(request, 'registration/profile.html', {
-        'user': request.user
+        'user': request.user,
+        'sponsorship_requests': sponsorship_requests,
+        'sponsorship_form': form,
     })
+
+
+def send_sponsorship_emails(sponsorship_request):
+    """Send email notifications for sponsorship requests"""
+    user = sponsorship_request.user
+
+    # Email to user (confirmation)
+    user_subject = 'Sponsorship Request Confirmation - Youth Impact Training Programme'
+    user_context = {
+        'user': user,
+        'sponsorship_request': sponsorship_request,
+    }
+
+    user_html_content = render_to_string('emails/sponsorship_confirmation.html', user_context)
+    user_text_content = render_to_string('emails/sponsorship_confirmation.txt', user_context)
+
+    user_email = EmailMultiAlternatives(
+        subject=user_subject,
+        body=user_text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[user.email],
+    )
+    user_email.attach_alternative(user_html_content, "text/html")
+    user_email.send()
+
+    # Email to admin (notification)
+    admin_subject = f'New Sponsorship Request - {user.get_full_name() or user.username}'
+    admin_context = {
+        'user': user,
+        'sponsorship_request': sponsorship_request,
+    }
+
+    admin_html_content = render_to_string('emails/sponsorship_admin_notification.html', admin_context)
+    admin_text_content = render_to_string('emails/sponsorship_admin_notification.txt', admin_context)
+
+    admin_email = EmailMultiAlternatives(
+        subject=admin_subject,
+        body=admin_text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=['info@youthimpactglobal.com'],
+        reply_to=[user.email],
+    )
+    admin_email.attach_alternative(admin_html_content, "text/html")
+
+    # Attach supporting document if provided
+    if sponsorship_request.supporting_document:
+        admin_email.attach_file(sponsorship_request.supporting_document.path)
+
+    admin_email.send()

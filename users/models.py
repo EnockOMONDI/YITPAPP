@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MinLengthValidator, MinValueValidator
+from django.utils import timezone
 from PIL import Image
 from django.conf import settings
 from taggit.managers import TaggableManager
@@ -121,3 +123,113 @@ class SecondSectionBox(models.Model):
     class Meta:
         verbose_name = "Second Section Box"
         verbose_name_plural = "Second Section Boxes"
+
+
+class SponsorshipRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending Review'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+        ('under_review', 'Under Review'),
+    ]
+
+    PROGRAM_CHOICES = [
+        ('goddess_care', 'Goddess Care Initiative'),
+        ('youth_empowerment', 'Youth Empowerment Program'),
+        ('community_development', 'Community Development'),
+        ('education_support', 'Education Support'),
+        ('skills_training', 'Skills Training'),
+        ('other', 'Other (Please specify)'),
+    ]
+
+    FINANCIAL_SITUATION_CHOICES = [
+        ('unemployed', 'Unemployed'),
+        ('student', 'Student'),
+        ('low_income', 'Low Income'),
+        ('single_parent', 'Single Parent'),
+        ('disabled', 'Person with Disability'),
+        ('refugee', 'Refugee/Asylum Seeker'),
+        ('other', 'Other (Please specify)'),
+    ]
+
+    # Basic Information
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sponsorship_requests')
+
+    # Program and Financial Details
+    program = models.CharField(max_length=50, choices=PROGRAM_CHOICES)
+    program_other = models.CharField(max_length=200, blank=True, help_text="Specify if 'Other' is selected")
+    amount_needed = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(1.00)],
+        help_text="Amount in USD"
+    )
+
+    # Financial Situation
+    financial_situation = models.CharField(max_length=50, choices=FINANCIAL_SITUATION_CHOICES)
+    financial_situation_other = models.CharField(max_length=200, blank=True, help_text="Specify if 'Other' is selected")
+
+    # Detailed Request
+    reason = models.TextField(
+        validators=[MinLengthValidator(100)],
+        help_text="Please provide a detailed explanation (minimum 100 characters)"
+    )
+
+    # Supporting Documentation
+    supporting_document = models.FileField(
+        upload_to='sponsorship_documents/',
+        blank=True,
+        null=True,
+        help_text="Optional: Upload supporting documents (PDF, DOC, DOCX, JPG, PNG)"
+    )
+
+    # Emergency Contact
+    emergency_contact_name = models.CharField(max_length=100)
+    emergency_contact_phone = models.CharField(max_length=20)
+    emergency_contact_email = models.EmailField()
+    emergency_contact_relationship = models.CharField(max_length=50, help_text="Relationship to you")
+
+    # Status and Timestamps
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    admin_notes = models.TextField(blank=True, help_text="Internal notes for administrators")
+
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewed_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='reviewed_sponsorship_requests'
+    )
+
+    class Meta:
+        verbose_name = "Sponsorship Request"
+        verbose_name_plural = "Sponsorship Requests"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.get_program_display()} - ${self.amount_needed}"
+
+    def get_program_name(self):
+        """Return the program name, including custom program if 'other' is selected"""
+        if self.program == 'other' and self.program_other:
+            return self.program_other
+        return self.get_program_display()
+
+    def get_financial_situation_name(self):
+        """Return the financial situation, including custom situation if 'other' is selected"""
+        if self.financial_situation == 'other' and self.financial_situation_other:
+            return self.financial_situation_other
+        return self.get_financial_situation_display()
+
+    def mark_as_reviewed(self, reviewer, status, notes=""):
+        """Mark the request as reviewed"""
+        self.status = status
+        self.reviewed_by = reviewer
+        self.reviewed_at = timezone.now()
+        if notes:
+            self.admin_notes = notes
+        self.save()
