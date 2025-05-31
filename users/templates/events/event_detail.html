@@ -51,9 +51,9 @@
             <!-- Event Content Section -->
             <div class="row">
                 <div class="col-xxl-8 col-xl-8 col-lg-8">
-                    <div class="event__detail-content white-bg p-40 mb-40" style="border-radius: 6px; box-shadow: 0px 30px 40px 0px rgba(1, 11, 60, 0.06);">
+                    <div class="event__detail-content white-bg p-40 mb-40" >
                         {% if event.image %}
-                        <div class="event__detail-thumb w-img mb-40">
+                        <div class="event__detail-thumb w-img mb-40" style="border-radius: 6px; box-shadow: 0px 30px 40px 0px rgba(1, 11, 60, 0.06);">
                             <img src="{{ event.image.cdn_url }}-/resize/800x600/-/quality/smart/-/format/auto/" alt="{{ event.title }}" style="border-radius: 6px; width: 100%;">
                         </div>
                         {% endif %}
@@ -69,7 +69,7 @@
                 <!-- Comments Section -->
                 <div class="col-xxl-4 col-xl-4 col-lg-4">
                     <div class="event__sidebar">
-                        <div class="event__widget white-bg p-30 mb-30" style="border-radius: 6px; box-shadow: 0px 30px 40px 0px rgba(1, 11, 60, 0.06);">
+                        <div class="event__widget white-bg p-30 mb-30" >
                             <h4 class="event__widget-title mb-25" style="color: #0e1133; font-size: 20px; font-weight: 600;">
                                 Comments ({{ comments.count }})
                             </h4>
@@ -165,7 +165,7 @@
                             </div>
                             {% endif %}
                             <h3 class="course__title mb-20">
-                                <a href="{% url 'events:event_detail' related_event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600;">{{ related_event.title }}</a>
+                                <a href="{% url 'events:event_detail' related_event.id %}" style="color: #0e1133; font-size: 20px; font-weight: 600; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.4;">{{ related_event.title }}</a>
                             </h3>
                             <div class="course__meta d-flex align-items-center justify-content-between mb-20">
                                 <div class="course__lesson">
@@ -181,7 +181,7 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <p style="color: #6d6e75; margin-bottom: 20px;">{{ related_event.content|striptags|truncatechars:100 }}</p>
+                            <p style="color: #6d6e75; margin-bottom: 20px; word-wrap: break-word; overflow-wrap: break-word; line-height: 1.6;">{{ related_event.content|striptags|truncatechars:100 }}</p>
                             <div class="course__more d-flex justify-content-between align-items-center">
                                 <div class="course__btn">
                                     <a href="{% url 'events:event_detail' related_event.id %}" class="link-btn">

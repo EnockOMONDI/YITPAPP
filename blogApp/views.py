@@ -63,7 +63,7 @@ def blogDetail(request, pid):
         "related_blogs": related_blogs,
         "categories": categories,  # Add categories for template compatibility
     }
-    return render(request, 'blogdetail.html', context)
+    return render(request, 'yitp/blogdetail.html', context)
     
 
 
