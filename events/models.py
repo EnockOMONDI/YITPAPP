@@ -27,6 +27,8 @@ class Event(models.Model):
     tags = TaggableManager()
     featured = models.BooleanField(default=False)
     content = RichTextField()
+    views = models.PositiveIntegerField(default=0)
+    category = models.ForeignKey('EventCategory', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = "Events"

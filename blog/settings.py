@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'users.apps.UsersConfig',
     'yitp',
-    'blogapp.apps.BlogappConfig'
+    'blogapp.apps.BlogappConfig',
     'events',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,21 +142,24 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# Additional directories to look for static files (e.g., your assets directory)
+# Additional directories to look for static files during development
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Directory for static files during development
 ]
 
+# Directory where static files are collected for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # WhiteNoise settings for serving static files
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"  # Disabled due to missing source maps
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Media files (user-uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"# Template settings
+# Template settings
 
 ## For media files
 UPLOADCARE = {

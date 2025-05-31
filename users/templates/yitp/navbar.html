@@ -41,7 +41,7 @@
                                     <li><a href="{% url 'yitp:team' %}" class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">The Team</a></li>
                                     <li><a href="{% url 'yitp:registration' %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}">How To Get Started?</a></li>
                                     <li><a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">Blogs & News</a></li>
-                                    <li><a href="{% url 'yitp:events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>
+                                    <li><a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>
                                     <li><a href="{% url 'yitp:faqs' %}" class="{% if request.resolver_match.url_name == 'faqs' %}active{% endif %}">FAQS</a></li>
                                 </ul>
                             </nav>

@@ -26,7 +26,7 @@ def event_list(request):
     if query:
         events = events.filter(
             Q(title__icontains=query) |
-            Q(description__icontains=query)
+            Q(content__icontains=query)
         ).distinct()
 
     if category:
@@ -51,7 +51,7 @@ def event_detail(request, id):
     comments = EventComment.objects.filter(event=event, active=True)
     related_events = Event.objects.filter(
         Q(category=event.category) | Q(event_type=event.event_type)
-    ).exclude(eid=eid).distinct()[:6]
+    ).exclude(id=id).distinct()[:6]
 
     # Increment views
     event.views += 1

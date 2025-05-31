@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from events.views import event_list
 
 app_name = 'yitp'  # This helps with URL namespacing
 
@@ -10,7 +11,7 @@ urlpatterns = [
     path('team/', views.team, name='team'),
     path('registration/', views.registration, name='registration'),
     path('registration2/', views.registration2, name='registration2'),
-    path('events/', views.events, name='events'),
+    path('events/', event_list, name='events'),
     path('faqs/', views.faqs, name='faqs'),
     path('contact/', views.contact, name='contact'),
     path('coursedetail1/', views.coursedetail1, name='coursedetail1'),
