@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from . models import Editpage,SecondSection,SecondSectionIcon,SecondSectionBox
 
 from django.shortcuts import render,redirect,HttpResponse
@@ -106,45 +111,145 @@ def contactus(request):
 # Create your views here.
 def register(request):
     if request.method == 'POST':
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
-        username = request.POST['username']
-        email = request.POST['email']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        if password1==password2:
-            if User.objects.filter(username=username).exists():
-                messages.info(request, 'Username already taken!')
-                return redirect('.')
-            elif User.objects.filter(email=email).exists():
-                messages.info(request, 'Email already registered!')
-                return redirect('.')
-            else:
-                user = User.objects.create_user(username=username, password=password1, email=email, first_name=first_name, last_name=last_name)
-                user.save()
-                user = auth.authenticate(username=username, password=password1)
+        try:
+            # Get form data
+            first_name = request.POST.get('first_name', '').strip()
+            last_name = request.POST.get('last_name', '').strip()
+            username = request.POST.get('username', '').strip()
+            email = request.POST.get('email', '').strip()
+            password1 = request.POST.get('password1', '')
+            password2 = request.POST.get('password2', '')
+            terms = request.POST.get('terms')
+
+            # Validation
+            errors = []
+
+            # Check required fields
+            if not all([first_name, last_name, username, email, password1, password2]):
+                errors.append('All fields are required.')
+
+            # Check terms acceptance
+            if not terms:
+                errors.append('You must agree to the Terms of Service and Privacy Policy.')
+
+            # Validate email format
+            if email:
+                try:
+                    validate_email(email)
+                except ValidationError:
+                    errors.append('Please enter a valid email address.')
+
+            # Check password match
+            if password1 != password2:
+                errors.append('Passwords do not match.')
+
+            # Validate password strength
+            if password1:
+                try:
+                    validate_password(password1)
+                except ValidationError as e:
+                    errors.extend(e.messages)
+
+            # Check if username exists
+            if username and User.objects.filter(username=username).exists():
+                errors.append('Username already taken. Please choose a different username.')
+
+            # Check if email exists
+            if email and User.objects.filter(email=email).exists():
+                errors.append('Email already registered. Please use a different email or sign in.')
+
+            # If there are errors, show them
+            if errors:
+                for error in errors:
+                    messages.error(request, error)
+                return render(request, 'signup.html')
+
+            # Create user
+            user = User.objects.create_user(
+                username=username,
+                password=password1,
+                email=email,
+                first_name=first_name,
+                last_name=last_name
+            )
+            user.save()
+
+            # Auto-login the user
+            user = auth.authenticate(username=username, password=password1)
+            if user:
                 auth.login(request, user)
-                return redirect('blog')
-        else:
-            messages.info(request, 'Password not matching!')
-            return render('.')
+                messages.success(request, f'Welcome {first_name}! Your account has been created successfully.')
+                return redirect('yitp:home')  # Redirect to home instead of non-existent 'blog'
+            else:
+                messages.success(request, 'Account created successfully! Please log in.')
+                return redirect('login')
+
+        except Exception as e:
+            messages.error(request, 'An error occurred during registration. Please try again.')
+            return render(request, 'signup.html')
     else:
         return render(request, 'signup.html')
 
 def login(request):
+    # Redirect if user is already logged in
+    if request.user.is_authenticated:
+        return redirect('yitp:home')
+
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username', '').strip()
+        password = request.POST.get('password', '')
+        remember_me = request.POST.get('remember')
+
+        # Basic validation
+        if not username or not password:
+            messages.error(request, 'Please enter both username and password.')
+            return render(request, 'registration/login.html')
+
+        # Try to authenticate with username first
         user = auth.authenticate(username=username, password=password)
+
+        # If username authentication fails, try with email
+        if user is None:
+            try:
+                user_obj = User.objects.get(email=username)
+                user = auth.authenticate(username=user_obj.username, password=password)
+            except User.DoesNotExist:
+                pass
+
         if user is not None:
-            auth.login(request, user)
-            return redirect('blog')
+            if user.is_active:
+                auth.login(request, user)
+
+                # Handle remember me functionality
+                if not remember_me:
+                    request.session.set_expiry(0)  # Session expires when browser closes
+
+                # Get next URL or redirect to home
+                next_url = request.POST.get('next') or request.GET.get('next')
+                if next_url:
+                    return redirect(next_url)
+                else:
+                    messages.success(request, f'Welcome back, {user.first_name or user.username}!')
+                    return redirect('yitp:home')
+            else:
+                messages.error(request, 'Your account has been disabled. Please contact support.')
+                return render(request, 'registration/login.html')
         else:
-            messages.info(request, 'Invalid Credentials!')
-            return redirect('.')
+            messages.error(request, 'Invalid username/email or password. Please try again.')
+            return render(request, 'registration/login.html')
     else:
-        return render(request, 'login.html')
+        return render(request, 'registration/login.html')
 
 def logout(request):
-    auth.logout(request)
-    return render(request, 'logout.html')
+    if request.user.is_authenticated:
+        username = request.user.first_name or request.user.username
+        auth.logout(request)
+        messages.success(request, f'Goodbye {username}! You have been successfully logged out.')
+    return render(request, 'registration/logged_out.html')
+
+@login_required
+def profile(request):
+    """User profile view - requires authentication"""
+    return render(request, 'registration/profile.html', {
+        'user': request.user
+    })

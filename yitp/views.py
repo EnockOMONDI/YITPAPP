@@ -37,8 +37,11 @@ def faqs(request):
     return render(request, 'yitp/faqs.html')
 
 def contact(request):
-    
-    return render(request, 'yitp/contact.html') 
+    # Add a test message to verify messages framework is working
+    if request.method == 'GET':
+        messages.info(request, 'Welcome to our contact page! Feel free to reach out to us.')
+
+    return render(request, 'yitp/contact.html')
     
 
 def coursedetail1(request):

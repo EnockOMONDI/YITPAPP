@@ -1,0 +1,225 @@
+{% extends 'yitp/basenonav.html' %}
+{% load static %}
+
+{% block title %}My Profile - Youth Impact Training Programme{% endblock %}
+
+{% block extra_head %}
+<style>
+/* Profile page styling */
+.profile__area {
+    padding: 120px 0 60px 0;
+    background: #f8f9fa;
+}
+
+.profile__wrapper {
+    background: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0px 10px 30px 0px rgba(1, 11, 60, 0.06);
+    margin-bottom: 30px;
+}
+
+.profile__header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eef0f6;
+}
+
+.profile__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff5d15 0%, #e04a0f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.profile__info {
+    margin-bottom: 40px;
+}
+
+.info__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eef0f6;
+}
+
+.info__label {
+    color: #6d6e75;
+    font-weight: 600;
+    min-width: 120px;
+}
+
+.info__value {
+    color: #0e1133;
+    font-weight: 500;
+}
+
+.profile__actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.profile__actions .e-btn {
+    min-width: 140px;
+}
+
+@media (max-width: 576px) {
+    .profile__wrapper {
+        padding: 25px;
+        margin: 0 15px;
+    }
+    
+    .profile__actions {
+        flex-direction: column;
+    }
+    
+    .profile__actions .e-btn {
+        width: 100%;
+    }
+    
+    .info__item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="profile__area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xxl-8 col-xl-8 col-lg-10">
+                <div class="profile__wrapper">
+                    <div class="profile__header">
+                        <div class="profile__avatar">
+                            {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
+                        </div>
+                        <h2 style="color: #0e1133; font-size: 28px; font-weight: 700; margin-bottom: 10px;">
+                            {% if user.first_name %}
+                                {{ user.first_name }} {{ user.last_name }}
+                            {% else %}
+                                {{ user.username }}
+                            {% endif %}
+                        </h2>
+                        <p style="color: #6d6e75; margin: 0;">Youth Impact Training Programme Member</p>
+                    </div>
+
+                    <div class="profile__info">
+                        <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Account Information</h4>
+                        
+                        <div class="info__item">
+                            <span class="info__label">Username:</span>
+                            <span class="info__value">{{ user.username }}</span>
+                        </div>
+                        
+                        <div class="info__item">
+                            <span class="info__label">Email:</span>
+                            <span class="info__value">{{ user.email }}</span>
+                        </div>
+                        
+                        <div class="info__item">
+                            <span class="info__label">First Name:</span>
+                            <span class="info__value">{{ user.first_name|default:"Not provided" }}</span>
+                        </div>
+                        
+                        <div class="info__item">
+                            <span class="info__label">Last Name:</span>
+                            <span class="info__value">{{ user.last_name|default:"Not provided" }}</span>
+                        </div>
+                        
+                        <div class="info__item">
+                            <span class="info__label">Member Since:</span>
+                            <span class="info__value">{{ user.date_joined|date:"F d, Y" }}</span>
+                        </div>
+                        
+                        <div class="info__item">
+                            <span class="info__label">Last Login:</span>
+                            <span class="info__value">
+                                {% if user.last_login %}
+                                    {{ user.last_login|date:"F d, Y H:i" }}
+                                {% else %}
+                                    Never
+                                {% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="info__item" style="border-bottom: none;">
+                            <span class="info__label">Account Status:</span>
+                            <span class="info__value" style="color: {% if user.is_active %}#28a745{% else %}#dc3545{% endif %};">
+                                {% if user.is_active %}
+                                    <i class="fas fa-check-circle" style="margin-right: 5px;"></i>Active
+                                {% else %}
+                                    <i class="fas fa-times-circle" style="margin-right: 5px;"></i>Inactive
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="profile__actions">
+                        <a href="{% url 'yitp:registration' %}" class="e-btn e-btn-3">
+                            <i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>
+                            View Programs
+                        </a>
+                        <a href="{% url 'yitp:contact' %}" class="e-btn" style="background: transparent; border: 2px solid #ff5d15; color: #ff5d15;">
+                            <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                            Contact Support
+                        </a>
+                        <a href="{% url 'logout' %}" class="e-btn" style="background: #6d6e75; border-color: #6d6e75;">
+                            <i class="fas fa-sign-out-alt" style="margin-right: 8px;"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="profile__wrapper">
+                    <h4 style="color: #0e1133; margin-bottom: 25px; font-weight: 600;">Quick Links</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-20">
+                            <a href="{% url 'yitp:home' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-home" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
+                                <h6 style="color: #0e1133; margin-bottom: 5px;">Homepage</h6>
+                                <p style="color: #6d6e75; font-size: 14px; margin: 0;">Return to the main page</p>
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-20">
+                            <a href="{% url 'blogapp:blog-list' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-blog" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
+                                <h6 style="color: #0e1133; margin-bottom: 5px;">Blog Posts</h6>
+                                <p style="color: #6d6e75; font-size: 14px; margin: 0;">Read our latest articles</p>
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-20">
+                            <a href="{% url 'yitp:events' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-calendar" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
+                                <h6 style="color: #0e1133; margin-bottom: 5px;">Events</h6>
+                                <p style="color: #6d6e75; font-size: 14px; margin: 0;">View upcoming events</p>
+                            </a>
+                        </div>
+                        <div class="col-md-6 mb-20">
+                            <a href="{% url 'yitp:faqs' %}" style="display: block; padding: 20px; background: #f8f9fa; border-radius: 6px; text-decoration: none; transition: all 0.3s ease;">
+                                <i class="fas fa-question-circle" style="color: #ff5d15; font-size: 24px; margin-bottom: 10px;"></i>
+                                <h6 style="color: #0e1133; margin-bottom: 5px;">FAQs</h6>
+                                <p style="color: #6d6e75; font-size: 14px; margin: 0;">Get answers to common questions</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

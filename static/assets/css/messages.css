@@ -1,0 +1,309 @@
+/* YITP Django Messages Framework Styles */
+
+/* ===== MESSAGES CONTAINER ===== */
+.messages-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.message-alert {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    pointer-events: auto;
+    animation: slideDown 0.4s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.message-alert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: currentColor;
+    opacity: 0.8;
+}
+
+/* ===== MESSAGE CONTENT ===== */
+.message-content {
+    padding: 15px 0;
+    min-height: 60px;
+}
+
+.message-icon {
+    margin-right: 15px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    flex-shrink: 0;
+}
+
+.message-text {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-right: 15px;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* ===== MESSAGE TYPES ===== */
+
+/* Success Messages */
+.alert-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border-left: 4px solid #155724;
+}
+
+.alert-success .message-icon {
+    color: #d4edda;
+}
+
+.alert-success .btn-close {
+    color: white;
+}
+
+/* Error Messages */
+.alert-error,
+.alert-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border-left: 4px solid #721c24;
+}
+
+.alert-error .message-icon,
+.alert-danger .message-icon {
+    color: #f8d7da;
+}
+
+.alert-error .btn-close,
+.alert-danger .btn-close {
+    color: white;
+}
+
+/* Warning Messages */
+.alert-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    color: #212529;
+    border-left: 4px solid #856404;
+}
+
+.alert-warning .message-icon {
+    color: #856404;
+}
+
+.alert-warning .btn-close {
+    color: #212529;
+}
+
+/* Info Messages */
+.alert-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+    border-left: 4px solid #0c5460;
+}
+
+.alert-info .message-icon {
+    color: #d1ecf1;
+}
+
+.alert-info .btn-close {
+    color: white;
+}
+
+/* Default Messages */
+.alert-debug,
+.alert-default {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    color: white;
+    border-left: 4px solid #383d41;
+}
+
+.alert-debug .message-icon,
+.alert-default .message-icon {
+    color: #d6d8db;
+}
+
+.alert-debug .btn-close,
+.alert-default .btn-close {
+    color: white;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.message-alert.fade-out {
+    animation: slideUp 0.4s ease-in forwards;
+}
+
+/* ===== AUTO-DISMISS PROGRESS BAR ===== */
+.message-alert[data-auto-dismiss]::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+    animation: progressBar linear;
+    animation-duration: attr(data-auto-dismiss ms, 5000ms);
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .message-content {
+        padding: 12px 0;
+        min-height: 50px;
+    }
+    
+    .message-icon {
+        margin-right: 12px;
+        font-size: 18px;
+        width: 20px;
+    }
+    
+    .message-text {
+        font-size: 14px;
+        margin-right: 12px;
+    }
+    
+    .btn-close {
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .message-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+    
+    .message-icon {
+        margin-right: 0;
+        margin-bottom: 8px;
+        align-self: flex-start;
+    }
+    
+    .message-text {
+        margin-right: 0;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+    
+    .btn-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+}
+
+/* ===== MULTIPLE MESSAGES STACKING ===== */
+.message-alert + .message-alert {
+    margin-top: 2px;
+}
+
+/* ===== ACCESSIBILITY ===== */
+.message-alert:focus-within {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.btn-close:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .messages-container {
+        display: none;
+    }
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+    .message-alert {
+        border: 2px solid currentColor;
+    }
+    
+    .message-alert::before {
+        height: 6px;
+    }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    .message-alert {
+        animation: none;
+    }
+    
+    .message-alert.fade-out {
+        animation: none;
+        opacity: 0;
+    }
+    
+    .message-alert[data-auto-dismiss]::after {
+        animation: none;
+    }
+}

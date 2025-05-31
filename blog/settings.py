@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from django.contrib.messages import constants as messages
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -224,3 +225,15 @@ JET_SIDE_MENU_ITEMS = [
 # Additional Jet settings
 JET_CHANGE_FORM_SIBLING_LINKS = True
 JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.DefaultIndexDashboard'
+
+# Django Messages Framework Configuration
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
+# Message storage backend
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
