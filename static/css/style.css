@@ -59,15 +59,15 @@
 }
 
 .recent-post img{
-    width: 60;
-    height: 48;
+    width: 60px;
+    height: 48px;
     padding-left: 10pt;
     padding-top: 10pt;
 }
 
 .recent-post p{
-    width: 60;
-    height: 48;
+    width: auto;
+    height: auto;
     padding-left: 10pt;
     padding-top: 10pt;
     padding-bottom: 10pt;

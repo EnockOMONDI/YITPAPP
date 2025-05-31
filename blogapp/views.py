@@ -11,6 +11,9 @@ def blogList(request):
     featured_blog = Post.objects.filter(featured=True, status="published").order_by("-id")[:6]
     categories = Category.objects.filter(active=True)
 
+    # Get latest posts for sidebar
+    latest_posts = Post.objects.filter(status="published").order_by("-id")[:5]
+
     query = request.GET.get("q")
     if query:
         blog = blog.filter(
@@ -18,18 +21,22 @@ def blogList(request):
 
     paginator = Paginator(blog, 15)
     page_number = request.GET.get('page')
-    blog = paginator.get_page(page_number)
-    
-    
+    page_obj = paginator.get_page(page_number)
+
+
 
     context = {
         "query": query,
         "categories": categories,
+        "cat_list": categories,  # For base template compatibility
+        "latestpost_list": latest_posts,  # For base template compatibility
         "blog_count": blog_count,
-        "blog": blog,
+        "blog": page_obj,  # Paginated posts
+        "page_obj": page_obj,  # For pagination in base template
+        "is_paginated": page_obj.has_other_pages(),  # For pagination in base template
         "featured_blog": featured_blog,
     }
-    return render(request, 'bloglist.html', context)
+    return render(request, 'blog_list.html', context)
 
 def blogDetail(request, pid):
     post = Post.objects.get(status="published", pid=pid)
