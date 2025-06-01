@@ -23,3 +23,9 @@ services:
         value: ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech
       - key: DB_PORT
         value: 5432
+      - key: UPLOADCARE_PUBLIC_KEY
+        value: 18ad19435c41077ca842
+      - key: UPLOADCARE_SECRET_KEY
+        value: b27f8995d2e4b66cbf02
+      - key: DEFAULT_FROM_EMAIL
+        value: noreply@youthimpactglobal.com

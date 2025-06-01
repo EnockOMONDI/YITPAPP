@@ -46,8 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    
+    'django.contrib.staticfiles', 
     'ckeditor',
     'taggit',
     'import_export',
@@ -95,11 +94,11 @@ WHITENOISE_MANIFEST_STRICT = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER' ),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT' ),
+        'NAME': os.getenv('DB_NAME', 'YITPDB'),
+        'USER': os.getenv('DB_USER', 'YITPDB_owner'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'npg_n0zFeVa6SCxm'),
+        'HOST': os.getenv('DB_HOST', 'ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech'),
+        'PORT': os.getenv('DB_PORT', '5432'),
         'OPTIONS': {'sslmode': 'require'},
     }
 }
