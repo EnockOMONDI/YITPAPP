@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'jqx3e+sq2(sja+kuxr6(t5oijbe6(9jaf!1ieat0raf0nb&w=w')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
@@ -91,19 +91,22 @@ WHITENOISE_MANIFEST_STRICT = False
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-
+# Database configuration using environment variables
 DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'YITPDB',
-    'USER': 'YITPDB_owner',
-    'PASSWORD': 'npg_n0zFeVa6SCxm',
-    'HOST': 'ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech',
-    'PORT': '5432',
-    'OPTIONS': {'sslmode': 'require'},
-  }
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER' ),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT' ),
+        'OPTIONS': {'sslmode': 'require'},
+    }
 }
+
+# Alternative: Use DATABASE_URL if available (for compatibility with various deployment platforms)
+if os.getenv('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
 
 
 AUTH_PASSWORD_VALIDATORS = [

@@ -12,11 +12,14 @@ services:
       - key: ALLOWED_HOSTS
         value: "*"
       - key: DATABASE_URL
-        fromDatabase:
-          name: django-blog-db
-          property: connectionString
-
-databases:
-  - name: django-blog-db
-    databaseName: django_blog
-    plan: free
+        value: postgresql://YITPDB_owner:npg_n0zFeVa6SCxm@ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech:5432/YITPDB
+      - key: DB_NAME
+        value: YITPDB
+      - key: DB_USER
+        value: YITPDB_owner
+      - key: DB_PASSWORD
+        value: npg_n0zFeVa6SCxm
+      - key: DB_HOST
+        value: ep-cool-term-ab9d4hh0-pooler.eu-west-2.aws.neon.tech
+      - key: DB_PORT
+        value: 5432
