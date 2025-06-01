@@ -4,7 +4,7 @@
 
 ### ✅ Repository Configuration
 - **Repository**: https://github.com/EnockOMONDI/YITPAPP
-- **Branch**: `may31`
+- **Branch**: `deployment`
 - **render.yaml**: ✅ Configured for Neon PostgreSQL
 - **build.sh**: ✅ Optimized for production deployment
 - **requirements.txt**: ✅ All dependencies listed
@@ -34,7 +34,7 @@
 
 3. **Repository Configuration**
    - **Repository**: `EnockOMONDI/YITPAPP`
-   - **Branch**: `may31`
+   - **Branch**: `deployment`
    - **Root Directory**: Leave empty (use root)
 
 ### Step 2: Service Configuration
@@ -43,7 +43,7 @@
    - **Name**: `yitp-django-app` (or your preferred name)
    - **Environment**: `Python 3`
    - **Region**: Choose closest to your users
-   - **Branch**: `may31`
+   - **Branch**: `deployment`
 
 2. **Build & Deploy Settings**
    - **Build Command**: `./build.sh`
@@ -72,7 +72,7 @@ DB_PORT: 5432
 
 1. **Review Configuration**
    - Verify all settings are correct
-   - Ensure the `may31` branch is selected
+   - Ensure the `deployment` branch is selected
 
 2. **Start Deployment**
    - Click "Create Web Service"
@@ -82,7 +82,7 @@ DB_PORT: 5432
 ## 🔍 Monitoring Deployment
 
 ### Build Process Steps
-1. **Repository Clone**: Render clones the `may31` branch
+1. **Repository Clone**: Render clones the `deployment` branch
 2. **Dependency Installation**: `pip install -r requirements.txt`
 3. **Static Files Collection**: `python manage.py collectstatic`
 4. **Database Migrations**: `python manage.py migrate`
@@ -144,7 +144,7 @@ DB_PORT: 5432
 
 ### YITP Specific
 - **Repository**: https://github.com/EnockOMONDI/YITPAPP
-- **Branch**: `may31`
+- **Branch**: `deployment`
 - **Database**: Neon PostgreSQL (existing)
 
 ## 🎯 Success Criteria
