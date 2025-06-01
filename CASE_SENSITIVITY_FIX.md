@@ -106,19 +106,19 @@ python manage.py check
 ```bash
 git add .
 git commit -m "Fix case sensitivity: Update all references from blogapp to blogApp"
-git push origin development
+git push origin deployment
 ```
 
 ### **Step 3: Deploy to Render**
 - **Repository**: `https://github.com/EnockOMONDI/YITPAPP`
-- **Branch**: `development`
+- **Branch**: `deployment`
 - **Build Command**: `./build.sh`
 - **Start Command**: `gunicorn blog.wsgi:application`
 
 ### **Step 4: Monitor Build Process**
 Expected successful output:
 ```
-🚀 Building YITP Django Application (Development Branch)...
+🚀 Building YITP Django Application (Deployment Branch)...
 ✅ blogApp directory exists (camelCase)
 ✅ blogApp/__init__.py exists
 ✅ blogApp module imported successfully
@@ -130,7 +130,7 @@ Expected successful output:
 
 ### **If Import Errors Persist**:
 1. **Verify Remote Repository**:
-   - Check GitHub: `https://github.com/EnockOMONDI/YITPAPP/tree/development`
+   - Check GitHub: `https://github.com/EnockOMONDI/YITPAPP/tree/deployment`
    - Confirm directory is named `blogApp` (not `blogapp`)
 
 2. **Check Build Logs**:
@@ -176,4 +176,4 @@ If the remote directory is actually named something else:
 ---
 
 **Status**: Ready for deployment with case sensitivity fixes applied.  
-**Next Step**: Commit changes and deploy to Render using the `development` branch.
+**Next Step**: Commit changes and deploy to Render using the `deployment` branch.

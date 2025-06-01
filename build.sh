@@ -3,7 +3,7 @@
 # YITP Django Application Build Script for Render
 set -o errexit  # exit on error
 
-echo "🚀 Building YITP Django Application (Development Branch)..."
+echo "🚀 Building YITP Django Application (Deployment Branch)..."
 echo "================================================"
 
 # Check Python version
