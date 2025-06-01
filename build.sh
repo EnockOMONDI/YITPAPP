@@ -2,7 +2,7 @@
 
 # Build the project
 set -o errexit  # exit on error
-echo "Building the lgf."
+echo "Building your app sean, final moments to go live."
 
 
 
@@ -13,3 +13,6 @@ python manage.py collectstatic
 
 python manage.py makemigrations 
 python manage.py migrate 
+
+
+

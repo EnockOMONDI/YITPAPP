@@ -1,72 +1,174 @@
 {% load static %}
+
+
 <header>
-    <div id="header-sticky" class="header__area header__transparent header__padding">
+    <div id="header-sticky" class="header__area header__transparent header__padding" style="padding-top: 20px; padding-bottom: 20px;">
         <div class="container-fluid">
+            <!-- Desktop Layout Improvements -->
+            <style>
+                /* Navbar vertical padding for better visual spacing */
+                .header__area.header__padding {
+                    padding-top: 20px !important;
+                    padding-bottom: 20px !important;
+                }
+
+                /* Ensure mobile devices have appropriate padding */
+                @media (max-width: 991px) {
+                    .header__area.header__padding {
+                        padding-top: 15px !important;
+                        padding-bottom: 15px !important;
+                    }
+                }
+
+                @media (min-width: 992px) {
+                    .header__left {
+                        min-height: 60px;
+                    }
+
+                    .logo {
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .logo img {
+                        transition: all 0.3s ease;
+                        height: auto;
+                        object-fit: contain;
+                    }
+
+                    .header__category {
+                        display: flex;
+                        align-items: center;
+                        min-height: 60px;
+                    }
+
+                    .header__category .cat-menu {
+                        border-radius: 4px;
+                        transition: all 0.3s ease;
+                        white-space: nowrap;
+                        color: #0e1133;
+                        font-weight: 500;
+                        text-decoration: none;
+                    }
+
+                    .header__category .cat-menu:hover {
+                        color: #ff5d15;
+                        background-color: rgba(255, 93, 21, 0.1);
+                    }
+
+                    .main-menu ul li a {
+                        padding: 8px 0;
+                        font-weight: 500;
+                        transition: all 0.3s ease;
+                        white-space: nowrap;
+                    }
+
+                    .header__auth {
+                        flex-shrink: 0;
+                    }
+
+                    .header__btn {
+                        flex-shrink: 0;
+                    }
+                }
+
+                @media (min-width: 1200px) {
+                    .main-menu ul li {
+                        margin-right: 10px !important;
+                    }
+
+                    .main-menu ul li:last-child {
+                        margin-right: 0 !important;
+                    }
+
+                    .logo {
+                        margin-right: 20px !important;
+                    }
+                }
+
+                @media (max-width: 1199px) and (min-width: 992px) {
+                    .main-menu ul li {
+                        margin-right: 15px !important;
+                    }
+
+                    .main-menu ul li a {
+                        font-size: 14px;
+                    }
+
+                    .logo {
+                        margin-right: 10px !important;
+                    }
+
+                    .header__category {
+                        padding-left: 5px !important;
+                    }
+                }
+            </style>
             <div class="row align-items-center">
-                <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-2 col-sm-4 col-6">
-                    <div class="header__left d-flex">
-                        <div class="logo">
+                <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6">
+                    <div class="header__left d-flex align-items-center">
+                        <div class="logo" style="flex-shrink: 0; margin-right: 15px;">
                             <a href="{% url 'yitp:home' %}">
-                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 140%;" alt="logo">
+                                <img src="{% static 'assets/img/logo/youthImpact.png' %}" style="width: 200%; max-width: 280px;" alt="logo">
                             </a>
-                        </div>
-                        <div class="header__category d-none d-lg-block">
-                            <nav>
-                                <ul>
-                                    <li>
-                                        <a href="{% url 'yitp:courses' %}"class="cat-menu d-flex align-items-center">
-                                            <div class="cat-dot-icon d-inline-block">
-                                                <!-- SVG content -->
-                                            </div>
-                                            <span>View Course</span>
-                                        </a>
-                                        <ul class="cat-submenu">
-                                            <li style="padding-left: 30px; color: #1a2e53;">
-                                                <a href="{% url 'yitp:courses' %}">YITP Course & Units</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-10 col-sm-8 col-6">
+                <div class="col-xxl-2 col-xl-2 col-lg-3 d-none d-lg-block">
+                    <div class="header__category" style="padding-left: 10px;">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="{% url 'yitp:courses' %}" class="cat-menu d-flex align-items-center" style="padding: 8px 12px; white-space: nowrap;">
+                                        <div class="cat-dot-icon d-inline-block" style="margin-right: 8px;">
+                                            <!-- SVG content -->
+                                        </div>
+                                        <span>View Course</span>
+                                    </a>
+                                    <ul class="cat-submenu">
+                                        <li style="padding-left: 30px; color: #1a2e53;">
+                                            <a href="{% url 'yitp:courses' %}">YITP Course & Units</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-xxl-8 col-xl-8 col-lg-7 col-md-10 col-sm-8 col-6">
                     <div class="header__right d-flex justify-content-end align-items-center">
-                        <div class="main-menu">
+                        <div class="main-menu d-none d-xl-block" style="margin-right: 20px;">
                             <nav id="mobile-menu">
-                                <ul>
-                                    <li><a href="{% url 'yitp:home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
-                                    <li><a href="{% url 'yitp:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">Our Story</a></li>
-                                    <li><a href="{% url 'yitp:team' %}" class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">The Team</a></li>
-                                    <li><a href="{% url 'yitp:registration' %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}">How To Get Started?</a></li>
-                                    <li><a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">Blogs & News</a></li>
-                                    <li><a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>
-                                    <li><a href="{% url 'yitp:faqs' %}" class="{% if request.resolver_match.url_name == 'faqs' %}active{% endif %}">FAQS</a></li>
+                                <ul class="d-flex align-items-center" style="margin: 0; padding: 0; list-style: none;">
+                                    <li style="margin-right: 25px;"><a href="{% url 'yitp:about' %}" class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}">Our Story</a></li>
+                                    <li style="margin-right: 25px;"><a href="{% url 'yitp:team' %}" class="{% if request.resolver_match.url_name == 'team' %}active{% endif %}">The Team</a></li>
+                                    <li style="margin-right: 25px;"><a href="{% url 'yitp:registration' %}" class="{% if request.resolver_match.url_name == 'registration' %}active{% endif %}">How To Get Started?</a></li>
+                                    <li style="margin-right: 25px;"><a href="{% url 'blogapp:blog-list' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">Blogs & News</a></li>
+                                    <li style="margin-right: 25px;"><a href="{% url 'events:event_list' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>
                                 </ul>
                             </nav>
                         </div>
                         <!-- Authentication Section -->
-                        <div class="header__auth ml-20 d-none d-sm-block">
+                        <div class="header__auth d-none d-sm-block" style="margin-left: 15px; margin-right: 15px;">
                             {% if user.is_authenticated %}
                                 <!-- Authenticated User Menu -->
                                 <div class="auth__user-menu d-flex align-items-center">
                                     <div class="user__info dropdown">
                                         <a href="#" class="user__toggle d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="user__avatar">
-                                                <span class="avatar__text">
+                                                <span class="avatar__text" >
                                                     {{ user.first_name|first|default:user.username|first|upper }}{{ user.last_name|first|upper|default:"" }}
                                                 </span>
                                             </div>
                                             <div class="user__details ml-10 d-none d-md-block">
-                                                <span class="user__name">
+                                                <span class="user__name" style="color: #ff5d15;">
                                                     {% if user.first_name %}
                                                         {{ user.first_name }}
                                                     {% else %}
                                                         {{ user.username }}
                                                     {% endif %}
                                                 </span>
-                                                <i class="fas fa-chevron-down ml-5"></i>
+                                                <i style="color: #ff5d15;" class="fas fa-chevron-down ml-5"></i>
                                             </div>
                                         </a>
                                         <ul class="dropdown-menu user__dropdown" aria-labelledby="userDropdown">
@@ -118,11 +220,11 @@
                         </div>
 
                         <!-- Contact Button (moved after auth) -->
-                        <div class="header__btn ml-15 d-none d-lg-block">
-                            <a href="{% url 'yitp:contact' %}" class="e-btn ">Contact Us</a>
+                        <div class="header__btn d-none d-lg-block" style="margin-left: 10px;">
+                            <a href="{% url 'yitp:contact' %}" class="e-btn">Contact Us</a>
                         </div>
-                        <div class="sidebar__menu d-xl-none">
-                            <div class="sidebar-toggle-btn ml-30" id="sidebar-toggle">
+                        <div class="sidebar__menu d-xl-none" style="margin-left: 20px;">
+                            <div class="sidebar-toggle-btn" id="sidebar-toggle">
                                 <span class="line"></span>
                                 <span class="line"></span>
                                 <span class="line"></span>

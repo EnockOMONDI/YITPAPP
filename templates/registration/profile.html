@@ -468,9 +468,25 @@
                                             <h6 style="color: #0e1133; margin-bottom: 5px;">{{ request.get_program_name }}</h6>
                                             <p style="color: #6d6e75; margin: 0; font-size: 14px;">Request #{{ request.id }} • ${{ request.amount_needed }}</p>
                                         </div>
-                                        <span class="status-badge status-{{ request.status }}" style="padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase;">
-                                            {{ request.get_status_display }}
-                                        </span>
+                                        <div style="text-align: right;">
+                                            <span class="status-badge status-{{ request.status }}" style="padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; display: inline-block; margin-bottom: 5px;">
+                                                {% if request.status == 'pending' %}⏳{% elif request.status == 'under_review' %}🔍{% elif request.status == 'approved' %}✅{% elif request.status == 'rejected' %}❌{% endif %}
+                                                {{ request.get_status_display }}
+                                            </span>
+                                            {% if request.status == 'approved' %}
+                                                <div style="font-size: 10px; color: #28a745; font-weight: 600;">
+                                                    🎉 Congratulations!
+                                                </div>
+                                            {% elif request.status == 'under_review' %}
+                                                <div style="font-size: 10px; color: #ffc107; font-weight: 600;">
+                                                    📋 In Progress
+                                                </div>
+                                            {% elif request.status == 'rejected' %}
+                                                <div style="font-size: 10px; color: #6d6e75; font-weight: 600;">
+                                                    💡 See feedback below
+                                                </div>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                     <div class="request__details" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
                                         <div>
@@ -489,9 +505,21 @@
                                         {% endif %}
                                     </div>
                                     {% if request.admin_notes %}
-                                        <div class="admin__notes" style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid #ff5d15;">
-                                            <small style="color: #6d6e75; font-weight: 600;">Admin Notes:</small><br>
-                                            <span style="color: #0e1133;">{{ request.admin_notes }}</span>
+                                        <div class="admin__notes" style="background: white; padding: 15px; border-radius: 4px; border-left: 3px solid #ff5d15; margin-top: 15px;">
+                                            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                                                <i class="fas fa-comment-alt" style="color: #ff5d15; margin-right: 8px;"></i>
+                                                <small style="color: #6d6e75; font-weight: 600;">
+                                                    {% if request.status == 'approved' %}Approval Message:{% elif request.status == 'rejected' %}Feedback:{% else %}Update from Review Team:{% endif %}
+                                                </small>
+                                            </div>
+                                            <div style="color: #0e1133; line-height: 1.5;">{{ request.admin_notes|linebreaks }}</div>
+                                            {% if request.reviewed_by %}
+                                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #eee; font-size: 11px; color: #6d6e75;">
+                                                    <i class="fas fa-user" style="margin-right: 5px;"></i>
+                                                    {{ request.reviewed_by.get_full_name|default:request.reviewed_by.username }}
+                                                    {% if request.reviewed_at %}• {{ request.reviewed_at|date:"M d, Y H:i" }}{% endif %}
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     {% endif %}
                                 </div>

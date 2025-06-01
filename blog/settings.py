@@ -24,12 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'jqx3e+sq2(sja+kuxr6(t5oijbe6(9jaf!1ieat0raf0nb&w=w'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'jqx3e+sq2(sja+kuxr6(t5oijbe6(9jaf!1ieat0raf0nb&w=w')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application definition

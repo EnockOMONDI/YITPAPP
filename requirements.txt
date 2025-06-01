@@ -24,3 +24,8 @@ python-decouple==3.8
 
 # Production Server
 gunicorn==20.1.0
+
+
+
+
+
