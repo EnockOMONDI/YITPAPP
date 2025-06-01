@@ -46,7 +46,7 @@ urlpatterns = [
     # Main app URLs
     path('', include('yitp.urls')),
     path('users', include('users.urls')),
-    path('blogs/', include('blogApp.urls')),
+    path('blogs/', include('blogapp.urls')),
     path('events/', include('events.urls')),
 
 ]

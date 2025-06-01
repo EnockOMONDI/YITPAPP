@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blogApp.models import Post, Comment, Category, StaticContent
+from blogapp.models import Post, Comment, Category, StaticContent
 from import_export.admin import ImportExportModelAdmin
 
 class StaticContentAdmin(admin.ModelAdmin):

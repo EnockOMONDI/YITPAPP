@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from blogApp.models import Post, Category, Comment
+from blogapp.models import Post, Category, Comment
 from django.contrib import messages
 from django.db.models import Q, Count
 from django.core.paginator import Paginator

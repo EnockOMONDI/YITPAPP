@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'users',  # Simplified from 'users.apps.UsersConfig'
     'yitp',
-    'blogApp',  # Updated to match actual directory case (blogApp)
+    'blogapp',  # Fixed to match actual directory name (blogapp)
     'events',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -213,10 +213,10 @@ JET_SIDE_MENU_COMPACT = True
 
 JET_SIDE_MENU_ITEMS = [
     {'label': 'Blog Management', 'items': [
-        {'name': 'blogApp.post', 'label': 'Posts'},
-        {'name': 'blogApp.category', 'label': 'Categories'},
-        {'name': 'blogApp.comment', 'label': 'Comments'},
-        {'name': 'blogApp.staticcontent', 'label': 'Static Content'},
+        {'name': 'blogapp.post', 'label': 'Posts'},
+        {'name': 'blogapp.category', 'label': 'Categories'},
+        {'name': 'blogapp.comment', 'label': 'Comments'},
+        {'name': 'blogapp.staticcontent', 'label': 'Static Content'},
     ]},
     {'label': 'Users', 'items': [
         {'name': 'auth.user'},
