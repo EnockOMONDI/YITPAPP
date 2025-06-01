@@ -2,6 +2,7 @@ services:
   - type: web
     name: django-blog
     env: python
+    branch: development
     buildCommand: ./build.sh
     startCommand: gunicorn blog.wsgi:application
     envVars:

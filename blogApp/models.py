@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
 from taggit.managers import TaggableManager
 from html import unescape
 from django.utils.html import strip_tags
@@ -48,13 +47,11 @@ class Post(models.Model):
 
     class Meta:
         verbose_name = "Posts"
-        verbose_name_plural = "Posts "
-    
+        verbose_name_plural = "Posts"
+        ordering = ['-date']
+
     def __str__(self):
         return self.title[0:10]
-
-    class Meta:
-        ordering = ['-date']
 
     def get_read_time(self):
         string = self.content + unescape(strip_tags(self.content))

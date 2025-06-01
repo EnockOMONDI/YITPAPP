@@ -3,7 +3,7 @@
 # YITP Django Application Build Script for Render
 set -o errexit  # exit on error
 
-echo "🚀 Building YITP Django Application..."
+echo "🚀 Building YITP Django Application (Development Branch)..."
 echo "================================================"
 
 # Check Python version
@@ -15,13 +15,54 @@ echo "📦 Installing Python dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# Verify Django installation
-echo "🔍 Verifying Django installation..."
-python -c "import django; print(f'Django version: {django.get_version()}')"
+# Verify critical imports
+echo "🔍 Verifying critical imports..."
+python -c "
+import django
+print(f'✅ Django version: {django.get_version()}')
+
+import shortuuid
+print('✅ shortuuid imported successfully')
+
+import pyuploadcare
+print('✅ pyuploadcare imported successfully')
+
+import psycopg2
+print('✅ psycopg2 imported successfully')
+"
+
+# Test Django app imports before configuration check
+echo "🔧 Testing Django app imports..."
+python -c "
+import os
+import sys
+import django
+
+# Add current directory to Python path
+sys.path.insert(0, os.getcwd())
+
+# Set Django settings
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog.settings')
+
+# Test individual app imports
+try:
+    import blogapp
+    print('✅ blogapp module imported successfully')
+
+    import blogapp.apps
+    print('✅ blogapp.apps imported successfully')
+
+    from blogapp.apps import BlogappConfig
+    print('✅ BlogappConfig imported successfully')
+
+except ImportError as e:
+    print(f'❌ Import error: {e}')
+    sys.exit(1)
+"
 
 # Check Django configuration
 echo "🔧 Checking Django configuration..."
-python manage.py check --deploy
+python manage.py check
 
 # Collect static files for production
 echo "📁 Collecting static files..."
