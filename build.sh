@@ -47,26 +47,34 @@ ls -la
 echo "🐍 Python path:"
 python -c "import sys; print('\n'.join(sys.path))"
 
-# Check if blogapp directory exists
-echo "🔍 Checking for blogapp directory:"
+# Check for blog app directory (handle case sensitivity)
+echo "🔍 Checking for blog app directory:"
+BLOG_APP_DIR=""
 if [ -d "blogapp" ]; then
-    echo "✅ blogapp directory exists"
-    echo "📋 blogapp directory contents:"
-    ls -la blogapp/
-
-    # Check specific files
-    echo "🔍 Checking critical blogapp files:"
-    for file in "__init__.py" "apps.py" "models.py" "views.py" "urls.py"; do
-        if [ -f "blogapp/$file" ]; then
-            echo "  ✅ blogapp/$file exists"
-        else
-            echo "  ❌ blogapp/$file missing"
-        fi
-    done
+    BLOG_APP_DIR="blogapp"
+    echo "✅ blogapp directory exists (lowercase)"
+elif [ -d "blogApp" ]; then
+    BLOG_APP_DIR="blogApp"
+    echo "✅ blogApp directory exists (camelCase)"
 else
-    echo "❌ blogapp directory does not exist!"
+    echo "❌ No blog app directory found!"
     echo "📋 Available directories:"
     find . -maxdepth 1 -type d -name "*app*" -o -name "*blog*" | head -10
+fi
+
+if [ -n "$BLOG_APP_DIR" ]; then
+    echo "📋 $BLOG_APP_DIR directory contents:"
+    ls -la "$BLOG_APP_DIR/"
+
+    # Check specific files
+    echo "🔍 Checking critical $BLOG_APP_DIR files:"
+    for file in "__init__.py" "apps.py" "models.py" "views.py" "urls.py"; do
+        if [ -f "$BLOG_APP_DIR/$file" ]; then
+            echo "  ✅ $BLOG_APP_DIR/$file exists"
+        else
+            echo "  ❌ $BLOG_APP_DIR/$file missing"
+        fi
+    done
 fi
 
 # Check other Django apps
@@ -86,59 +94,89 @@ import os
 import sys
 import traceback
 
-print(f'🐍 Python executable: {sys.executable}')
-print(f'📁 Current working directory: {os.getcwd()}')
-print(f'📋 Directory contents: {os.listdir(\".\")}')
+print('🐍 Python executable:', sys.executable)
+print('📁 Current working directory:', os.getcwd())
+print('📋 Directory contents:', os.listdir('.'))
 
 # Add current directory to Python path
 sys.path.insert(0, os.getcwd())
-print(f'🛤️  Updated Python path: {sys.path[:3]}...')
+print('🛤️  Updated Python path (first 3):', sys.path[:3])
 
-# Check if blogapp directory exists from Python
+# Determine which blog app directory exists
+blog_app_dir = None
 if os.path.exists('blogapp'):
-    print('✅ blogapp directory exists (Python check)')
-    print(f'📋 blogapp contents: {os.listdir(\"blogapp\")}')
-
-    # Check __init__.py
-    if os.path.exists('blogapp/__init__.py'):
-        print('✅ blogapp/__init__.py exists')
-        with open('blogapp/__init__.py', 'r') as f:
-            content = f.read()
-            print(f'📄 __init__.py content length: {len(content)} characters')
-    else:
-        print('❌ blogapp/__init__.py missing')
+    blog_app_dir = 'blogapp'
+    print('✅ blogapp directory exists (lowercase)')
+elif os.path.exists('blogApp'):
+    blog_app_dir = 'blogApp'
+    print('✅ blogApp directory exists (camelCase)')
 else:
-    print('❌ blogapp directory does not exist (Python check)')
+    print('❌ No blog app directory found')
+    # List all directories containing 'app'
+    app_dirs = [d for d in os.listdir('.') if os.path.isdir(d) and 'app' in d.lower()]
+    print('📁 Directories containing app:', app_dirs)
+    sys.exit(1)
+
+print('📋', blog_app_dir, 'contents:', os.listdir(blog_app_dir))
+
+# Check __init__.py
+init_file = os.path.join(blog_app_dir, '__init__.py')
+if os.path.exists(init_file):
+    print('✅', blog_app_dir + '/__init__.py exists')
+    with open(init_file, 'r') as f:
+        content = f.read()
+        print('📄 __init__.py content length:', len(content), 'characters')
+else:
+    print('❌', blog_app_dir + '/__init__.py missing')
 
 # Test individual app imports with detailed error handling
-print('\\n🔧 Testing imports...')
+print()
+print('🔧 Testing imports...')
 try:
-    print('🔍 Attempting to import blogapp...')
-    import blogapp
-    print('✅ blogapp module imported successfully')
-    print(f'📍 blogapp module location: {blogapp.__file__}')
+    if blog_app_dir == 'blogapp':
+        print('🔍 Attempting to import blogapp...')
+        import blogapp as blog_module
+        print('✅ blogapp module imported successfully')
+        print('📍 blogapp module location:', blog_module.__file__)
 
-    print('🔍 Attempting to import blogapp.apps...')
-    import blogapp.apps
-    print('✅ blogapp.apps imported successfully')
+        print('🔍 Attempting to import blogapp.apps...')
+        import blogapp.apps
+        print('✅ blogapp.apps imported successfully')
 
-    print('🔍 Attempting to import BlogappConfig...')
-    from blogapp.apps import BlogappConfig
-    print('✅ BlogappConfig imported successfully')
-    print(f'📍 BlogappConfig: {BlogappConfig}')
+        print('🔍 Attempting to import BlogappConfig...')
+        from blogapp.apps import BlogappConfig
+        print('✅ BlogappConfig imported successfully')
+        print('📍 BlogappConfig:', BlogappConfig)
+
+    elif blog_app_dir == 'blogApp':
+        print('🔍 Attempting to import blogApp...')
+        import blogApp as blog_module
+        print('✅ blogApp module imported successfully')
+        print('📍 blogApp module location:', blog_module.__file__)
+
+        print('🔍 Attempting to import blogApp.apps...')
+        import blogApp.apps
+        print('✅ blogApp.apps imported successfully')
+
+        print('🔍 Attempting to import BlogappConfig...')
+        from blogApp.apps import BlogappConfig
+        print('✅ BlogappConfig imported successfully')
+        print('📍 BlogappConfig:', BlogappConfig)
 
 except ImportError as e:
-    print(f'❌ Import error: {e}')
+    print('❌ Import error:', str(e))
     print('🔍 Full traceback:')
     traceback.print_exc()
 
     # Additional debugging
-    print('\\n🔍 Additional debugging information:')
-    print(f'📁 Current directory files: {[f for f in os.listdir(\".\") if not f.startswith(\".\")}')
+    print()
+    print('🔍 Additional debugging information:')
+    non_hidden_files = [f for f in os.listdir('.') if not f.startswith('.')]
+    print('📁 Current directory files:', non_hidden_files)
 
     # Try to find any *app* directories
     app_dirs = [d for d in os.listdir('.') if os.path.isdir(d) and 'app' in d.lower()]
-    print(f'📁 Directories containing \"app\": {app_dirs}')
+    print('📁 Directories containing app:', app_dirs)
 
     sys.exit(1)
 "
