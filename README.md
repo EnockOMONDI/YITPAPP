@@ -50,7 +50,7 @@ Make sure you are in `env` and then do the following each at a time.
 
 ```bash
 (env)$ python manage.py makemigrations
-(env)$ python manage.py makemigrations blogApp
+(env)$ python manage.py makemigrations blogapp
 (env)$ python manage.py makemigrations users
 (env)$ python manage.py migrate
 (env)$ python manage.py createsuperuser

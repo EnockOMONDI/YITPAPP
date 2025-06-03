@@ -37,13 +37,13 @@ def test_django_setup():
         
         print("\n🔍 Testing app registry:")
         try:
-            app_config = apps.get_app_config('blogApp')
-            print(f"  ✅ blogApp found in app registry")
+            app_config = apps.get_app_config('blogapp')
+            print(f"  ✅ blogapp found in app registry")
             print(f"  📍 App name: {app_config.name}")
             print(f"  📍 App label: {app_config.label}")
             print(f"  📍 App verbose name: {app_config.verbose_name}")
         except Exception as e:
-            print(f"  ❌ blogApp not found in app registry: {e}")
+            print(f"  ❌ blogapp not found in app registry: {e}")
             return False
         
         return True
@@ -55,22 +55,22 @@ def test_django_setup():
         return False
 
 def test_model_imports():
-    """Test model imports from blogApp."""
-    print("\n📊 Testing Model Imports from blogApp")
+    """Test model imports from blogapp."""
+    print("\n📊 Testing Model Imports from blogapp")
     print("=" * 60)
-    
+
     try:
-        print("🔍 Importing models from blogApp...")
-        from blogApp.models import Post, Category, Comment, StaticContent
-        
+        print("🔍 Importing models from blogapp...")
+        from blogapp.models import Post, Category, Comment, StaticContent
+
         print("✅ All models imported successfully:")
         print(f"  📍 Post: {Post}")
         print(f"  📍 Category: {Category}")
         print(f"  📍 Comment: {Comment}")
         print(f"  📍 StaticContent: {StaticContent}")
-        
+
         return True
-        
+
     except ImportError as e:
         print(f"❌ Model import failed: {e}")
         return False
@@ -82,20 +82,20 @@ def test_admin_imports():
     """Test admin imports (this was the failing point)."""
     print("\n👨‍💼 Testing Admin Imports")
     print("=" * 60)
-    
+
     try:
-        print("🔍 Importing admin from blogApp...")
-        import blogApp.admin
-        
+        print("🔍 Importing admin from blogapp...")
+        import blogapp.admin
+
         print("✅ Admin module imported successfully")
-        print(f"  📍 Admin module: {blogApp.admin}")
-        
+        print(f"  📍 Admin module: {blogapp.admin}")
+
         # Check if admin classes are properly defined
-        admin_classes = [attr for attr in dir(blogApp.admin) if attr.endswith('Admin')]
+        admin_classes = [attr for attr in dir(blogapp.admin) if attr.endswith('Admin')]
         print(f"  📋 Admin classes found: {admin_classes}")
-        
+
         return True
-        
+
     except ImportError as e:
         print(f"❌ Admin import failed: {e}")
         import traceback
@@ -108,21 +108,21 @@ def test_admin_imports():
         return False
 
 def test_url_imports():
-    """Test URL imports from blogApp."""
+    """Test URL imports from blogapp."""
     print("\n🔗 Testing URL Imports")
     print("=" * 60)
-    
+
     try:
-        print("🔍 Importing URLs from blogApp...")
-        import blogApp.urls
-        
+        print("🔍 Importing URLs from blogapp...")
+        import blogapp.urls
+
         print("✅ URL module imported successfully")
-        print(f"  📍 URL module: {blogApp.urls}")
-        print(f"  📍 App name: {blogApp.urls.app_name}")
-        print(f"  📍 URL patterns: {len(blogApp.urls.urlpatterns)} patterns")
-        
+        print(f"  📍 URL module: {blogapp.urls}")
+        print(f"  📍 App name: {blogapp.urls.app_name}")
+        print(f"  📍 URL patterns: {len(blogapp.urls.urlpatterns)} patterns")
+
         return True
-        
+
     except ImportError as e:
         print(f"❌ URL import failed: {e}")
         return False
@@ -131,23 +131,23 @@ def test_url_imports():
         return False
 
 def test_views_imports():
-    """Test view imports from blogApp."""
+    """Test view imports from blogapp."""
     print("\n👁️  Testing View Imports")
     print("=" * 60)
-    
+
     try:
-        print("🔍 Importing views from blogApp...")
-        import blogApp.views
-        
+        print("🔍 Importing views from blogapp...")
+        import blogapp.views
+
         print("✅ Views module imported successfully")
-        print(f"  📍 Views module: {blogApp.views}")
-        
+        print(f"  📍 Views module: {blogapp.views}")
+
         # Check for view functions
-        view_functions = [attr for attr in dir(blogApp.views) if not attr.startswith('_') and callable(getattr(blogApp.views, attr))]
+        view_functions = [attr for attr in dir(blogapp.views) if not attr.startswith('_') and callable(getattr(blogapp.views, attr))]
         print(f"  📋 View functions found: {view_functions}")
-        
+
         return True
-        
+
     except ImportError as e:
         print(f"❌ Views import failed: {e}")
         return False

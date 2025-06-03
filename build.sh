@@ -53,9 +53,6 @@ BLOG_APP_DIR=""
 if [ -d "blogapp" ]; then
     BLOG_APP_DIR="blogapp"
     echo "✅ blogapp directory exists (lowercase)"
-elif [ -d "blogApp" ]; then
-    BLOG_APP_DIR="blogApp"
-    echo "✅ blogApp directory exists (camelCase)"
 else
     echo "❌ No blog app directory found!"
     echo "📋 Available directories:"
@@ -107,9 +104,6 @@ blog_app_dir = None
 if os.path.exists('blogapp'):
     blog_app_dir = 'blogapp'
     print('✅ blogapp directory exists (lowercase)')
-elif os.path.exists('blogApp'):
-    blog_app_dir = 'blogApp'
-    print('✅ blogApp directory exists (camelCase)')
 else:
     print('❌ No blog app directory found')
     # List all directories containing 'app'
@@ -148,20 +142,7 @@ try:
         print('✅ BlogappConfig imported successfully')
         print('📍 BlogappConfig:', BlogappConfig)
 
-    elif blog_app_dir == 'blogApp':
-        print('🔍 Attempting to import blogApp...')
-        import blogApp as blog_module
-        print('✅ blogApp module imported successfully')
-        print('📍 blogApp module location:', blog_module.__file__)
-
-        print('🔍 Attempting to import blogApp.apps...')
-        import blogApp.apps
-        print('✅ blogApp.apps imported successfully')
-
-        print('🔍 Attempting to import BlogappConfig...')
-        from blogApp.apps import BlogappConfig
-        print('✅ BlogappConfig imported successfully')
-        print('📍 BlogappConfig:', BlogappConfig)
+    # Since we only support blogapp now, remove the blogApp case
 
 except ImportError as e:
     print('❌ Import error:', str(e))

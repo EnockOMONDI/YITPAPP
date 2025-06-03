@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 YITP Case Sensitivity Test Script
-This script tests the blogApp vs blogapp case sensitivity issue.
+This script tests the blogapp directory and import consistency.
 
 Usage:
     python test_case_sensitivity.py
@@ -16,7 +16,7 @@ def test_directory_existence():
     print("🔍 Testing Directory Existence")
     print("=" * 50)
     
-    directories_to_check = ['blogapp', 'blogApp', 'BlogApp', 'BLOGAPP']
+    directories_to_check = ['blogapp']
     
     for directory in directories_to_check:
         if os.path.exists(directory):
@@ -53,10 +53,8 @@ def test_python_imports():
     
     import_tests = [
         ('blogapp', 'import blogapp'),
-        ('blogApp', 'import blogApp'),
-        ('BlogApp', 'import BlogApp'),
     ]
-    
+
     for app_name, import_statement in import_tests:
         print(f"\n🔍 Testing: {import_statement}")
         try:
@@ -64,15 +62,7 @@ def test_python_imports():
                 import blogapp
                 print(f"   ✅ {app_name} imported successfully")
                 print(f"   📍 Location: {blogapp.__file__}")
-            elif app_name == 'blogApp':
-                import blogApp
-                print(f"   ✅ {app_name} imported successfully")
-                print(f"   📍 Location: {blogApp.__file__}")
-            elif app_name == 'BlogApp':
-                import BlogApp
-                print(f"   ✅ {app_name} imported successfully")
-                print(f"   📍 Location: {BlogApp.__file__}")
-                
+
         except ImportError as e:
             print(f"   ❌ {app_name} import failed: {e}")
         except Exception as e:
@@ -118,15 +108,7 @@ def test_django_configuration():
         except Exception as e:
             print(f"   ❌ blogapp not found in app registry: {e}")
             
-        try:
-            if 'blogApp' in settings.INSTALLED_APPS:
-                app_config = apps.get_app_config('blogApp')
-                print(f"   ✅ blogApp found in app registry")
-                print(f"   📍 App config: {app_config}")
-                print(f"   📍 App name: {app_config.name}")
-                print(f"   📍 App label: {app_config.label}")
-        except Exception as e:
-            print(f"   ❌ blogApp not found in app registry: {e}")
+        # Only test blogapp since we've standardized on lowercase
         
         return True
         
@@ -141,9 +123,8 @@ def test_model_imports():
     
     model_import_tests = [
         ('from blogapp.models import Post, Category, Comment', 'blogapp'),
-        ('from blogApp.models import Post, Category, Comment', 'blogApp'),
     ]
-    
+
     for import_statement, app_name in model_import_tests:
         print(f"\n🔍 Testing: {import_statement}")
         try:
@@ -153,13 +134,7 @@ def test_model_imports():
                 print(f"   📍 Post model: {Post}")
                 print(f"   📍 Category model: {Category}")
                 print(f"   📍 Comment model: {Comment}")
-            elif app_name == 'blogApp':
-                from blogApp.models import Post, Category, Comment
-                print(f"   ✅ Models imported from {app_name}")
-                print(f"   📍 Post model: {Post}")
-                print(f"   📍 Category model: {Category}")
-                print(f"   📍 Comment model: {Comment}")
-                
+
         except ImportError as e:
             print(f"   ❌ Model import from {app_name} failed: {e}")
         except Exception as e:
@@ -169,7 +144,7 @@ def main():
     """Main test function."""
     print("🔍 YITP Case Sensitivity Test")
     print("=" * 50)
-    print("Testing blogApp vs blogapp case sensitivity issues.\n")
+    print("Testing blogapp directory and import consistency.\n")
     
     tests = [
         ("Directory Existence", test_directory_existence),
@@ -208,18 +183,13 @@ def main():
     print("\n💡 RECOMMENDATIONS")
     print("=" * 50)
     
-    if os.path.exists('blogapp') and not os.path.exists('blogApp'):
+    if os.path.exists('blogapp'):
         print("📁 Local directory is 'blogapp' (lowercase)")
-        print("🔧 If remote is 'blogApp', consider renaming local directory")
-        print("   Command: mv blogapp blogApp")
-    elif os.path.exists('blogApp') and not os.path.exists('blogapp'):
-        print("📁 Local directory is 'blogApp' (camelCase)")
-        print("✅ Configuration updated to match camelCase")
-    elif os.path.exists('blogapp') and os.path.exists('blogApp'):
-        print("⚠️  Both 'blogapp' and 'blogApp' directories exist!")
-        print("🔧 This could cause conflicts - remove one of them")
+        print("✅ Configuration uses consistent lowercase naming")
+        print("✅ All imports and references use 'blogapp'")
     else:
-        print("❌ No blog app directory found!")
+        print("❌ No blogapp directory found!")
+        print("🔧 Expected directory: blogapp (lowercase)")
     
     return True
 
