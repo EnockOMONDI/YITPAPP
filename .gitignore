@@ -1,6 +1,10 @@
-.env
 *.pyc
 __pycache__/
+.env
+.venv
 db.sqlite3
-Media/
-assets/
+media/
+staticfiles/
+# Do NOT include these lines if they exist:
+# blogapp/
+# *.py
